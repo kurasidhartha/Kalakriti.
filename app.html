@@ -1,0 +1,3023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#7A2331">
+<title>Kalakriti — Where tradition meets expression</title>
+<style>
+/* ═══════════════ RESET & VARIABLES ═══════════════ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --cream:#F6EEDE; --paper:#FFF9EC;
+  --maroon:#7A2331; --deep-maroon:#5A1825;
+  --gold:#D9A441; --gold-light:#E8C57A;
+  --terracotta:#C1652F; --leaf:#3F6E52;
+  --indigo:#1F3B4D; --ink:#3B2418; --ink-soft:#6B4F3A;
+  --shadow:0 4px 16px rgba(122,35,49,.08);
+}
+html,body{height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  background:#e8e0d0; color:var(--ink);
+  overflow:hidden; position:fixed; width:100%; height:100%;
+}
+#app{
+  position:relative; width:100%; max-width:480px; height:100vh;
+  margin:0 auto; background:var(--cream); overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.15); display:flex; flex-direction:column;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit;font-size:14px;outline:none}
+::-webkit-scrollbar{width:0;height:0}
+
+/* Doodle background */
+.doodle{
+  background-color:var(--cream);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(122,35,49,.045) 0, transparent 18%),
+    radial-gradient(circle at 85% 65%, rgba(217,164,65,.06) 0, transparent 20%),
+    radial-gradient(circle at 50% 90%, rgba(63,110,82,.04) 0, transparent 18%);
+}
+
+/* ═══════════════ SPLASH ═══════════════ */
+.splash{
+  flex:1; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:44px; position:relative;
+}
+.splash-logo{position:relative;width:180px;height:180px;display:flex;align-items:center;justify-content:center}
+.splash-ring{
+  position:absolute;border-radius:50%;border:3px solid var(--gold);
+  animation:ringPulse 2.4s ease-out infinite;
+}
+.splash-ring:nth-child(2){animation-delay:.4s;border-color:var(--gold-light);border-width:2px}
+.splash-ring:nth-child(3){animation-delay:.8s;border-width:1px}
+@keyframes ringPulse{
+  0%{width:160px;height:160px;opacity:.8}
+  100%{width:280px;height:280px;opacity:0}
+}
+.splash-core{
+  width:160px;height:160px;border-radius:50%;
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  display:flex;align-items:center;justify-content:center;font-size:72px;
+  box-shadow:0 12px 32px rgba(122,35,49,.35);
+  animation:corePop .9s cubic-bezier(.2,1.4,.5,1) both;
+}
+@keyframes corePop{from{transform:scale(.45);opacity:0}to{transform:scale(1);opacity:1}}
+.splash-text{
+  text-align:center;animation:fadeUp .9s .3s ease-out both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.splash-text h1{
+  font-size:42px;color:var(--maroon);letter-spacing:2px;font-weight:700;
+}
+.splash-text h2{
+  font-size:15px;color:var(--maroon);letter-spacing:7px;font-weight:600;margin-top:6px;
+}
+.splash-text p{
+  font-size:13px;color:var(--ink-soft);font-style:italic;margin-top:14px;
+}
+.splash-dots{display:flex;gap:6px;animation:fadeUp .9s .3s ease-out both}
+.splash-dots span{
+  width:8px;height:8px;border-radius:4px;background:var(--maroon);opacity:.3;
+  animation:dotAnim 1.4s infinite;
+}
+.splash-dots span:nth-child(2){animation-delay:.2s}
+.splash-dots span:nth-child(3){animation-delay:.4s}
+@keyframes dotAnim{0%,60%,100%{opacity:.3;width:8px}30%{opacity:1;width:18px}}
+
+/* ═══════════════ ONBOARDING ═══════════════ */
+.onboard{flex:1;display:flex;flex-direction:column;padding:24px}
+.onboard-track{flex:1;display:flex;overflow:hidden}
+.onboard-page{
+  min-width:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:26px;padding:24px;text-align:center;
+  transition:transform .35s ease;
+}
+.onboard-illus{
+  width:200px;height:200px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:96px;
+  border:2px solid;
+}
+.onboard-page h3{font-size:26px;color:var(--maroon);font-weight:700;line-height:1.3}
+.onboard-page p{font-size:15px;color:var(--ink-soft);line-height:1.6;max-width:320px}
+.onboard-foot{display:flex;align-items:center;gap:8px}
+.onboard-dots{display:flex;gap:6px}
+.onboard-dots i{
+  display:block;width:8px;height:8px;border-radius:4px;
+  background:var(--maroon);opacity:.3;transition:.25s;
+}
+.onboard-dots i.on{width:24px;opacity:1}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;
+  background:var(--maroon);color:#fff;transition:.15s;
+}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--maroon);border:1.5px solid var(--maroon)}
+.btn.gold{background:var(--gold);color:var(--maroon)}
+.btn.full{width:100%}
+.btn:disabled{opacity:.5}
+
+/* ═══════════════ LOGIN ═══════════════ */
+.login{flex:1;display:flex;align-items:center;justify-content:center;padding:28px;overflow-y:auto}
+.login-inner{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:400px}
+.login-logo{
+  width:140px;height:140px;border-radius:50%;
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  display:flex;align-items:center;justify-content:center;font-size:68px;
+  box-shadow:0 12px 30px rgba(122,35,49,.35);
+}
+.login h1{font-size:38px;color:var(--maroon);letter-spacing:2px;margin-top:22px}
+.login h2{font-size:13px;color:var(--maroon);letter-spacing:6px;font-weight:600}
+.login .tag{font-size:13px;color:var(--ink-soft);font-style:italic;margin-top:4px}
+.login .welcome{font-size:18px;font-weight:600;color:var(--ink);margin-top:44px}
+.login .sub{font-size:13px;color:var(--ink-soft);text-align:center}
+.google-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:16px;border-radius:14px;background:#fff;
+  border:1.5px solid rgba(217,164,65,.6);font-weight:600;font-size:16px;
+  color:var(--maroon);margin-top:20px;transition:.15s;
+}
+.google-btn:active{transform:scale(.98)}
+.google-g{font-size:24px;font-weight:700;color:#4285F4}
+.secure-note{
+  display:flex;align-items:center;gap:6px;font-size:11px;
+  color:var(--ink-soft);opacity:.7;margin-top:28px;
+}
+.err-box{
+  width:100%;padding:12px;border-radius:12px;background:#fdeaea;
+  border:1px solid #f5c2c2;color:#c0392b;font-size:13px;margin-top:16px;
+  display:flex;gap:8px;align-items:center;
+}
+
+/* ═══════════════ MAIN SHELL ═══════════════ */
+.appbar{
+  background:var(--maroon);color:#fff;padding:14px 16px;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);z-index:10;
+}
+.appbar .title{font-size:17px;font-weight:700;letter-spacing:1.2px;display:flex;align-items:center;gap:8px}
+.appbar .spacer{flex:1}
+.appbar .icon-btn{
+  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:19px;position:relative;transition:.15s;
+}
+.appbar .icon-btn:active{background:rgba(255,255,255,.15)}
+.dot-badge{
+  position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;
+  background:var(--gold);border:1.5px solid var(--maroon);
+}
+.screen{
+  flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  padding-bottom:8px;position:relative;
+}
+.bottomnav{
+  display:flex;background:var(--paper);border-top:1px solid rgba(217,164,65,.4);
+  flex-shrink:0;padding-bottom:env(safe-area-inset-bottom);
+}
+.bottomnav button{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:10px 4px 8px;color:var(--ink-soft);font-size:10px;font-weight:600;
+  position:relative;transition:.15s;
+}
+.bottomnav button.on{color:var(--maroon)}
+.bottomnav .nav-ic{font-size:22px;line-height:1}
+.cart-badge{
+  position:absolute;top:4px;right:calc(50% - 22px);
+  background:var(--gold);color:var(--maroon);font-size:9px;font-weight:700;
+  min-width:16px;height:16px;padding:0 4px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ═══════════════ CARDS & LAYOUT ═══════════════ */
+.card{
+  background:var(--paper);border-radius:14px;
+  border:1px solid rgba(217,164,65,.4);padding:14px;
+}
+.section-title{
+  display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;
+  color:var(--maroon);margin:14px 14px 8px;
+}
+.section-title::before{
+  content:'';width:4px;height:16px;background:var(--gold);border-radius:2px;
+}
+.field{margin-bottom:14px}
+.field label{
+  display:flex;align-items:center;gap:8px;font-weight:700;color:var(--maroon);
+  font-size:13px;margin-bottom:6px;
+}
+.field label::before{content:'';width:4px;height:14px;background:var(--gold);border-radius:2px}
+.field input,.field textarea,.field select{
+  width:100%;padding:12px 14px;border:1px solid rgba(217,164,65,.5);
+  border-radius:12px;background:var(--paper);color:var(--ink);font-size:14px;
+  transition:.15s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--maroon);box-shadow:0 0 0 3px rgba(122,35,49,.08);
+}
+
+/* ═══════════════ SEARCH & CHIPS ═══════════════ */
+.search-wrap{padding:12px 14px 6px}
+.search{
+  display:flex;align-items:center;gap:10px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.5);border-radius:24px;padding:0 16px;
+}
+.search input{flex:1;padding:12px 0;border:none;background:transparent;font-size:14px}
+.chips{display:flex;gap:8px;padding:8px 14px;overflow-x:auto}
+.chip{
+  padding:8px 16px;border-radius:20px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.5);color:var(--maroon);font-size:13px;
+  font-weight:600;white-space:nowrap;transition:.15s;
+}
+.chip.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+
+/* ═══════════════ PRODUCT GRID ═══════════════ */
+.banner{
+  margin:10px 14px;padding:12px;border-radius:12px;display:flex;gap:10px;
+  align-items:center;font-size:12px;font-weight:500;
+  background:linear-gradient(90deg,rgba(217,164,65,.18),rgba(217,164,65,.08));
+  border:1px solid rgba(217,164,65,.5);color:var(--maroon);
+}
+.grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:6px 12px 90px;
+}
+.pcard{
+  background:var(--paper);border-radius:16px;overflow:hidden;
+  border:1px solid rgba(217,164,65,.35);
+  box-shadow:0 4px 12px rgba(122,35,49,.08);
+  display:flex;flex-direction:column;transition:.15s;
+}
+.pcard:active{transform:scale(.98)}
+.pcard-img{
+  aspect-ratio:1;position:relative;display:flex;align-items:center;
+  justify-content:center;font-size:56px;color:#fff;
+}
+.pcard-body{padding:8px 10px 10px;display:flex;flex-direction:column;gap:3px;flex:1}
+.pcard-title{
+  font-size:13px;font-weight:700;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.pcard-seller{
+  font-size:10px;color:var(--ink-soft);font-style:italic;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.pcard-rating{font-size:11px;color:var(--gold);font-weight:600}
+.pcard-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
+.pcard-price{font-size:16px;font-weight:700;color:var(--maroon)}
+.pcard-add{
+  width:30px;height:30px;border-radius:50%;background:var(--maroon);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.badge-new{
+  position:absolute;top:8px;left:8px;background:var(--maroon);color:#fff;
+  font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;
+  letter-spacing:.5px;
+}
+.badge-cat{
+  position:absolute;bottom:8px;left:8px;background:rgba(122,35,49,.85);
+  color:#fff;font-size:9px;padding:3px 8px;border-radius:4px;font-weight:500;
+}
+.wish-btn{
+  position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.95);display:flex;align-items:center;
+  justify-content:center;font-size:16px;
+}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:3px;padding:2px 6px;
+  border-radius:4px;font-size:9px;font-weight:700;
+}
+
+/* ═══════════════ EMPTY STATES ═══════════════ */
+.empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;padding:60px 24px;text-align:center;
+}
+.empty-circle{
+  width:110px;height:110px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:52px;background:rgba(217,164,65,.15);
+  color:var(--maroon);
+}
+.empty h3{font-size:16px;color:var(--ink);font-weight:600}
+.empty p{font-size:13px;color:var(--ink-soft);line-height:1.5;max-width:260px}
+
+/* ═══════════════ OVERLAY (pushed screens) ═══════════════ */
+.overlay{
+  position:absolute;inset:0;background:var(--cream);z-index:50;
+  display:flex;flex-direction:column;
+  animation:slideIn .22s ease-out;
+}
+@keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:none;opacity:1}}
+.overlay .appbar{background:var(--maroon)}
+
+/* ═══════════════ DETAIL SCREEN ═══════════════ */
+.detail-hero{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:120px;color:#fff;position:relative;
+}
+.detail-body{padding:18px;display:flex;flex-direction:column;gap:14px}
+.detail-cat{
+  display:inline-block;padding:4px 10px;border-radius:6px;font-size:12px;
+  font-weight:600;background:rgba(122,35,49,.1);color:var(--maroon);
+  border:1px solid rgba(122,35,49,.3);
+}
+.detail-title{font-size:24px;font-weight:700;color:var(--maroon);line-height:1.25}
+.detail-price{font-size:30px;font-weight:700;color:var(--maroon)}
+.detail-desc{font-size:14px;line-height:1.65;color:var(--ink)}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap}
+.pill{
+  padding:6px 12px;border-radius:14px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.4);font-size:12px;color:var(--ink);
+}
+.delivery-box{
+  padding:14px;border-radius:12px;background:rgba(63,110,82,.1);
+  border:1px solid rgba(63,110,82,.4);display:flex;flex-direction:column;gap:8px;
+}
+.delivery-box .row{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-soft)}
+.delivery-box .row b{color:var(--leaf);font-weight:700}
+.detail-actions{
+  display:flex;gap:10px;padding:12px;background:var(--paper);
+  border-top:1px solid rgba(217,164,65,.4);flex-shrink:0;
+}
+.detail-actions .btn{flex:1}
+
+/* ═══════════════ CART / CHECKOUT ═══════════════ */
+.cart-item{
+  display:flex;gap:12px;align-items:center;margin:0 12px 10px;
+  padding:10px;background:var(--paper);border-radius:14px;
+  border:1px solid rgba(217,164,65,.35);
+}
+.cart-thumb{
+  width:72px;height:72px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:36px;color:#fff;flex-shrink:0;
+}
+.cart-info{flex:1;min-width:0}
+.cart-info h4{
+  font-size:13px;font-weight:700;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.cart-info .price{font-size:12px;color:var(--ink-soft);margin:2px 0 6px}
+.qty-ctrl{display:flex;align-items:center;gap:12px}
+.qty-btn{
+  width:26px;height:26px;border-radius:8px;background:rgba(122,35,49,.08);
+  display:flex;align-items:center;justify-content:center;color:var(--maroon);
+  font-weight:700;
+}
+.cart-line-total{font-size:15px;font-weight:700;color:var(--maroon);flex-shrink:0}
+.checkout-total{
+  padding:16px;background:var(--paper);border-top:1px solid rgba(217,164,65,.4);
+}
+.sum-row{
+  display:flex;justify-content:space-between;font-size:13px;
+  color:var(--ink-soft);padding:4px 0;
+}
+.sum-row.big{font-size:16px;font-weight:700;color:var(--maroon);padding-top:8px;
+  border-top:1px solid rgba(217,164,65,.3);margin-top:6px}
+.sum-row.green{color:var(--leaf)}
+
+/* ═══════════════ WALLET ═══════════════ */
+.wallet-hero{
+  margin:16px;padding:24px;border-radius:20px;color:#fff;
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  box-shadow:0 10px 30px rgba(122,35,49,.35);
+}
+.wallet-hero .label{font-size:13px;opacity:.85}
+.wallet-hero .coins{font-size:38px;font-weight:700;margin:8px 0;display:flex;align-items:center;gap:10px}
+.wallet-hero .sub{font-size:11px;opacity:.75}
+.earn-tile{
+  display:flex;gap:12px;align-items:center;padding:14px;margin:0 16px 10px;
+  background:var(--paper);border-radius:14px;
+  border:1px solid rgba(217,164,65,.35);
+}
+.earn-tile .ic{
+  width:40px;height:40px;border-radius:10px;background:rgba(217,164,65,.15);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  color:var(--maroon);flex-shrink:0;
+}
+.earn-tile .info{flex:1;min-width:0}
+.earn-tile h4{font-size:14px;font-weight:700;color:var(--ink)}
+.earn-tile .r{font-size:12px;color:var(--leaf);margin-top:2px}
+
+/* ═══════════════ PROFILE ═══════════════ */
+.profile-hero{
+  margin:16px;padding:22px;border-radius:20px;color:#fff;text-align:center;
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  box-shadow:0 10px 28px rgba(122,35,49,.3);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.profile-avatar{
+  width:80px;height:80px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:40px;
+  color:var(--maroon);font-weight:700;
+}
+.profile-name{font-size:20px;font-weight:700}
+.profile-email{font-size:12px;opacity:.8}
+.profile-badges{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;justify-content:center}
+.p-badge{
+  padding:4px 10px;border-radius:10px;background:rgba(255,255,255,.15);
+  font-size:10px;display:flex;align-items:center;gap:4px;
+}
+.qa-row{display:flex;gap:10px;padding:0 16px}
+.qa-btn{
+  flex:1;padding:14px 8px;border-radius:14px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.4);display:flex;flex-direction:column;
+  align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--ink);
+}
+.qa-btn .ic{font-size:22px;color:var(--maroon)}
+.menu-list{padding:6px 16px 90px}
+.menu-tile{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:10px;
+  background:var(--paper);border-radius:14px;
+  border:1px solid rgba(217,164,65,.4);font-size:14px;font-weight:600;color:var(--ink);
+  transition:.15s;
+}
+.menu-tile:active{background:#fff8e8}
+.menu-tile .ic{font-size:20px;color:var(--maroon);width:24px;text-align:center}
+.menu-tile .chev{margin-left:auto;color:var(--ink-soft);font-size:18px}
+.menu-tile.danger{color:#c0392b}
+.menu-tile.danger .ic{color:#c0392b}
+
+/* ═══════════════ UPLOAD SCREEN ═══════════════ */
+.upload{padding:16px 16px 90px}
+.voice-card{
+  padding:16px;border-radius:16px;color:#fff;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  box-shadow:0 8px 20px rgba(122,35,49,.3);display:flex;gap:14px;
+  align-items:center;transition:.15s;
+}
+.voice-card:active{transform:scale(.98)}
+.voice-card .mic{
+  width:52px;height:52px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  color:var(--maroon);flex-shrink:0;
+}
+.voice-card .info h4{font-size:16px;font-weight:700;margin-bottom:3px}
+.voice-card .info p{font-size:11px;opacity:.85}
+.photo-drop{
+  height:200px;border-radius:20px;background:var(--paper);
+  border:1.5px dashed rgba(217,164,65,.6);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;color:var(--ink-soft);
+  cursor:pointer;transition:.15s;margin-bottom:14px;
+}
+.photo-drop:active{background:#fff4dc}
+.photo-drop .ic{
+  width:70px;height:70px;border-radius:50%;background:rgba(217,164,65,.15);
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  color:var(--maroon);
+}
+.photo-strip{display:flex;gap:10px;overflow-x:auto;padding:4px 0 14px}
+.photo-thumb{
+  position:relative;width:110px;height:110px;flex-shrink:0;border-radius:14px;
+  overflow:hidden;
+}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-thumb .x{
+  position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;
+  background:rgba(0,0,0,.65);color:#fff;display:flex;align-items:center;
+  justify-content:center;font-size:14px;
+}
+.loc-card{
+  padding:14px;border-radius:14px;display:flex;gap:12px;align-items:center;
+  margin-bottom:16px;
+}
+.loc-card.set{background:rgba(63,110,82,.1);border:1.5px solid rgba(63,110,82,.5)}
+.loc-card.unset{background:rgba(217,164,65,.15);border:1.5px solid rgba(122,35,49,.5)}
+.loc-card .ic{font-size:22px;flex-shrink:0}
+.loc-card .info{flex:1;min-width:0}
+.loc-card .info h4{font-size:14px;font-weight:700}
+.loc-card .info p{font-size:11px;color:var(--ink-soft);margin-top:2px}
+
+/* ═══════════════ OVERLAY FORM ═══════════════ */
+.modal-bg{
+  position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:100;
+  display:flex;align-items:flex-end;justify-content:center;
+  animation:fadeIn .2s;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--cream);border-radius:24px 24px 0 0;width:100%;
+  max-height:85vh;overflow-y:auto;padding:20px;
+  animation:slideUp .25s ease-out;
+}
+@keyframes slideUp{from{transform:translateY(30px)}to{transform:none}}
+.modal h3{font-size:18px;font-weight:700;color:var(--maroon);margin-bottom:16px}
+.modal-actions{display:flex;gap:10px;margin-top:16px}
+.modal-actions .btn{flex:1}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+  background:var(--leaf);color:#fff;padding:12px 20px;border-radius:12px;
+  font-size:14px;font-weight:500;z-index:1000;max-width:90%;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  animation:toastIn .3s ease-out;
+}
+@keyframes toastIn{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+
+/* Tabs inside screens */
+.tabs{display:flex;gap:8px;padding:12px 16px 8px}
+.tab{
+  flex:1;padding:10px;border-radius:10px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.4);font-size:13px;font-weight:600;
+  color:var(--ink-soft);text-align:center;transition:.15s;
+}
+.tab.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+
+/* Review card */
+.review{
+  padding:12px;border-radius:12px;background:var(--paper);margin-bottom:10px;
+  border:1px solid rgba(217,164,65,.35);
+}
+.review-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.review-av{
+  width:28px;height:28px;border-radius:50%;background:rgba(217,164,65,.4);
+  display:flex;align-items:center;justify-content:center;color:var(--maroon);
+  font-weight:700;font-size:12px;
+}
+.review-name{font-size:13px;font-weight:600;flex:1;color:var(--ink)}
+.review-text{font-size:13px;color:var(--ink);line-height:1.45}
+
+/* Star rating */
+.stars{color:var(--gold);font-size:14px;letter-spacing:1px}
+
+/* Notification item */
+.notif{
+  padding:14px;border-radius:14px;background:var(--paper);margin:0 16px 10px;
+  border:1px solid rgba(217,164,65,.35);display:flex;gap:12px;
+}
+.notif.unread{border-color:var(--maroon);background:#fff}
+.notif .ic{
+  width:38px;height:38px;border-radius:50%;background:rgba(217,164,65,.2);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  color:var(--maroon);flex-shrink:0;
+}
+.notif h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.notif p{font-size:13px;color:var(--ink-soft);line-height:1.4}
+
+/* Chat bubbles */
+.chat-bubble{
+  max-width:78%;padding:10px 14px;border-radius:14px;margin-bottom:10px;
+  font-size:14px;line-height:1.45;word-wrap:break-word;
+}
+.chat-bubble.me{
+  align-self:flex-end;background:var(--maroon);color:#fff;
+  border-bottom-right-radius:2px;
+}
+.chat-bubble.them{
+  align-self:flex-start;background:var(--paper);color:var(--ink);
+  border:1px solid rgba(217,164,65,.4);border-bottom-left-radius:2px;
+}
+
+/* Chips toggle */
+.toggle-row{display:flex;gap:8px;padding:0 16px 10px;overflow-x:auto}
+.toggle-chip{
+  padding:8px 14px;border-radius:20px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.5);font-size:12px;font-weight:600;
+  color:var(--maroon);white-space:nowrap;transition:.15s;
+  display:flex;align-items:center;gap:6px;
+}
+.toggle-chip.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+
+/* Language switcher */
+.lang-wrap{
+  padding:14px;background:#fff;border-radius:12px;
+  border:1px solid rgba(217,164,65,.5);margin-bottom:14px;
+}
+.lang-wrap h4{
+  display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;
+  color:var(--maroon);margin-bottom:12px;
+}
+.lang-grid{display:flex;gap:8px;flex-wrap:wrap}
+.lang-btn{
+  padding:10px 14px;border-radius:10px;background:var(--paper);
+  border:1px solid rgba(217,164,65,.6);display:flex;flex-direction:column;
+  gap:2px;transition:.2s;
+}
+.lang-btn.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.lang-btn .native{font-size:14px;font-weight:700}
+.lang-btn .lbl{font-size:11px;opacity:.75}
+
+/* Splash overlay */
+.center-spin{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:30px;color:var(--maroon);font-size:14px;
+}
+.spin{
+  width:36px;height:36px;border-radius:50%;
+  border:3px solid rgba(122,35,49,.2);border-top-color:var(--maroon);
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   KALAKRITI WEB — vanilla JS port
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────── i18n ─────── */
+const I18N = {
+  en:{
+    brand:'Kalakriti', tagline:'Where tradition meets expression',
+    tab_shop:'Shop',tab_add:'Upload',tab_cart:'Cart',tab_profile:'You',
+    search_hint:'Search sarees, kurtis, jewelry…',
+    fair_feed:'Fair Feed · equal visibility for every seller',
+    new_badge:'NEW',add_to_cart:'Add to Cart',buy_now:'Buy Now',
+    add_more:'Add more',photos:'Photos',voice_lang:'Voice Language',
+    empty_cart:'Your cart is empty',grand_total:'Grand Total',
+    checkout:'Checkout',order_placed:'Order placed!',
+    my_shop:'My Shop',my_products:'My Products',no_products:'No products yet.',
+    fill_required:'Fill title, price and pick an image',
+    uploaded:'Product published!',no_match:'No products match.',
+    loading:'Loading…',logout:'Sign Out',settings:'Settings',
+    display_name:'Display Name',bio:'About your craft',
+    save_changes:'Save Changes',saved:'Saved!',
+    language:'Language',account:'Account',
+    chat_title:'Kalakriti Assistant',chat_hint:'Ask about pricing, tips…',
+    chat_empty:'Ask me anything — pricing help, festival tips.',
+    location:'Location',delivery:'Delivery Info',
+    delete:'Delete',delete_confirm:'Delete this listing?',
+    cancel:'Cancel',delete_btn:'Delete',
+    orders:'Orders',wishlist:'Wishlist',no_orders:'No orders yet',
+    no_wishlist:'Nothing in wishlist',
+    ai_filled:'AI filled the form — review and edit',
+    reviews:'Reviews',write_review:'Write a review',
+    no_reviews:'No reviews yet. Be the first!',
+    rating:'Rating',your_review:'Your review',
+    submit_review:'Submit Review',review_added:'Review submitted!',
+    seller:'Seller',seller_products:'Products by this seller',
+    notifications:'Notifications',no_notifications:'No notifications yet',
+    addresses:'Addresses',add_address:'Add Address',edit_address:'Edit Address',
+    full_name:'Full Name',phone:'Phone',address_line:'Address',
+    city:'City',state:'State',pincode:'Pincode',
+    save_address:'Save Address',default_address:'Default',set_default:'Set as default',
+    payment:'Payment',payment_method:'Payment Method',
+    cod:'Cash on Delivery',upi:'UPI',card:'Credit / Debit Card',netbanking:'Net Banking',
+    place_order:'Place Order',order_confirmed:'Order confirmed!',
+    order_id:'Order ID',track_order:'Track Order',order_tracking:'Order Tracking',
+    confirmed:'Confirmed',packed:'Packed',shipped:'Shipped',
+    delivered:'Delivered',out_for_delivery:'Out for delivery',
+    help:'Help & FAQ',about:'About Kalakriti',coupons:'Coupons',
+    apply_coupon:'Apply Coupon',coupon_applied:'Coupon applied!',
+    invalid_coupon:'Invalid coupon code',
+    subtotal:'Subtotal',discount:'Discount',
+    delivery_fee:'Delivery',trending:'Trending now',recently_viewed:'Recently viewed',
+    price_low:'Price: Low → High',price_high:'Price: High → Low',
+    newest:'Newest first',rating_high:'Top rated',
+    filters:'Filters',sort_by:'Sort by',
+    results:'Results',
+    skip:'Skip',next:'Next',get_started:'Get Started',
+    onboard_1_title:'Discover authentic crafts',
+    onboard_1_desc:'Handpicked sarees, jewelry and handicrafts from artisans across India.',
+    onboard_2_title:'AI-powered listings',
+    onboard_2_desc:'Snap a photo, speak your story — our AI writes the listing.',
+    onboard_3_title:'Fair for every seller',
+    onboard_3_desc:'Every artisan gets equal visibility. No paid boosts. Just craft.',
+    map:'Artisan Map',calendar:'Calendar',
+    near_me:'Near me',near_me_hint:'Show products within 300 km',
+    location_set:'Location set!',
+    delivery_eta:'Delivery ETA',from_you:'from you',
+    delivery_charge:'Delivery charge',free_delivery:'FREE delivery',
+    shipping_from:'Ships from',voice_listing:'Voice Listing',
+    speak_now:'Speak now…',translating:'Translating…',
+    verified:'Verified',trust_score:'Trust Score',
+    welcome_artisan:'Welcome, artisan',
+    sign_in_prompt:'Sign in to start selling your craft',
+    secure_signin:'Secure sign-in with your Google account',
+    your_location:'Your Location',or:'OR',
+    continue_google:'Continue with Google',
+    wallet:'Wallet',refer:'Refer & Earn',
+    product:'Product',description:'Description',tags:'Tags',
+    list_new_craft:'List a New Craft',category:'Category',title:'Title',
+    title_hint:'e.g. "Banarasi Silk Saree"',
+    desc_hint:'Speak or type the story behind this piece…',
+    price:'Price (₹)',price_hint:'e.g. 1200',
+    save_listing:'Publish Listing',remove_bg:'Remove Background',
+    analyzing:'AI analyzing…',take_photo:'Take Photo',
+    from_gallery:'Choose from Gallery',
+    use_my_location:'Use My Location',set_location:'Set Your Location',
+    pick_on_map:'Pick on Map',
+    mic_unavailable:'Voice not available on this device',
+    privacy:'Privacy',feedback:'Send Feedback',
+    notification_prefs:'Notification prefs',
+  },
+  hi:{
+    brand:'कलाकृति',tagline:'जहाँ परंपरा अभिव्यक्ति से मिलती है',
+    tab_shop:'दुकान',tab_add:'अपलोड',tab_cart:'कार्ट',tab_profile:'आप',
+    search_hint:'साड़ी, कुर्ती, गहने खोजें…',
+    fair_feed:'निष्पक्ष फ़ीड · हर विक्रेता को समान दृश्यता',
+    new_badge:'नया',add_to_cart:'कार्ट में जोड़ें',buy_now:'अभी खरीदें',
+    add_more:'और जोड़ें',photos:'फ़ोटो',voice_lang:'आवाज़ भाषा',
+    empty_cart:'कार्ट खाली है',grand_total:'कुल योग',
+    checkout:'चेकआउट',order_placed:'ऑर्डर हो गया!',
+    my_shop:'मेरी दुकान',my_products:'मेरे उत्पाद',no_products:'अभी कोई उत्पाद नहीं।',
+    fill_required:'शीर्षक, कीमत, फ़ोटो चुनें',
+    uploaded:'उत्पाद प्रकाशित हुआ!',no_match:'कोई उत्पाद नहीं मिला।',
+    loading:'लोड हो रहा…',logout:'साइन आउट',settings:'सेटिंग्स',
+    display_name:'प्रदर्शित नाम',bio:'अपनी कला के बारे में',
+    save_changes:'बदलाव सहेजें',saved:'सहेजा गया!',
+    language:'भाषा',account:'खाता',
+    chat_title:'कलाकृति सहायक',chat_hint:'कीमत, सुझाव पूछें…',
+    chat_empty:'कुछ भी पूछें — कीमत सलाह, त्योहार टिप्स।',
+    location:'स्थान',delivery:'डिलीवरी जानकारी',
+    delete:'हटाएं',delete_confirm:'यह सूची हटाएं?',
+    cancel:'रद्द',delete_btn:'हटाएं',
+    orders:'ऑर्डर',wishlist:'पसंदीदा',no_orders:'अभी कोई ऑर्डर नहीं',
+    no_wishlist:'पसंदीदा खाली है',
+    ai_filled:'AI ने फ़ॉर्म भर दिया',
+    reviews:'समीक्षाएँ',write_review:'समीक्षा लिखें',
+    no_reviews:'अभी कोई समीक्षा नहीं।',
+    rating:'रेटिंग',your_review:'आपकी समीक्षा',
+    submit_review:'समीक्षा भेजें',review_added:'समीक्षा भेजी गई!',
+    seller:'विक्रेता',seller_products:'इस विक्रेता के उत्पाद',
+    notifications:'सूचनाएँ',no_notifications:'अभी कोई सूचना नहीं',
+    addresses:'पते',add_address:'पता जोड़ें',edit_address:'पता संपादित करें',
+    full_name:'पूरा नाम',phone:'फ़ोन',address_line:'पता',
+    city:'शहर',state:'राज्य',pincode:'पिनकोड',
+    save_address:'पता सहेजें',default_address:'डिफ़ॉल्ट',set_default:'डिफ़ॉल्ट बनाएं',
+    payment:'भुगतान',payment_method:'भुगतान विधि',
+    cod:'कैश ऑन डिलीवरी',upi:'UPI',card:'क्रेडिट / डेबिट कार्ड',netbanking:'नेट बैंकिंग',
+    place_order:'ऑर्डर करें',order_confirmed:'ऑर्डर की पुष्टि हुई!',
+    order_id:'ऑर्डर आईडी',track_order:'ऑर्डर ट्रैक करें',order_tracking:'ऑर्डर ट्रैकिंग',
+    confirmed:'पुष्ट',packed:'पैक',shipped:'भेजा गया',
+    delivered:'पहुँचाया',out_for_delivery:'डिलीवरी के लिए निकला',
+    help:'सहायता और FAQ',about:'कलाकृति के बारे में',coupons:'कूपन',
+    apply_coupon:'कूपन लागू करें',coupon_applied:'कूपन लागू!',
+    invalid_coupon:'अमान्य कूपन कोड',
+    subtotal:'उप-योग',discount:'छूट',
+    delivery_fee:'डिलीवरी',trending:'ट्रेंडिंग',recently_viewed:'हाल में देखा',
+    price_low:'कीमत: कम → ज़्यादा',price_high:'कीमत: ज़्यादा → कम',
+    newest:'नवीनतम पहले',rating_high:'शीर्ष रेटेड',
+    filters:'फ़िल्टर',sort_by:'क्रमबद्ध करें',
+    results:'परिणाम',
+    skip:'छोड़ें',next:'आगे',get_started:'शुरू करें',
+    onboard_1_title:'प्रामाणिक कला खोजें',
+    onboard_1_desc:'पूरे भारत के शिल्पकारों से चुनी हुई साड़ियाँ, गहने।',
+    onboard_2_title:'AI-संचालित सूची',
+    onboard_2_desc:'फ़ोटो लें, कहानी बोलें — हमारा AI सूची लिख देगा।',
+    onboard_3_title:'हर विक्रेता के लिए निष्पक्ष',
+    onboard_3_desc:'हर शिल्पकार को समान दृश्यता।',
+    map:'शिल्पकार नक्शा',calendar:'कैलेंडर',
+    near_me:'मेरे पास',near_me_hint:'300 किमी के अंदर उत्पाद',
+    location_set:'स्थान सेट हो गया!',
+    delivery_eta:'डिलीवरी समय',from_you:'आपसे',
+    delivery_charge:'डिलीवरी शुल्क',free_delivery:'मुफ़्त डिलीवरी',
+    shipping_from:'यहाँ से भेजा',voice_listing:'आवाज़ सूची',
+    speak_now:'अब बोलिए…',translating:'अनुवाद हो रहा…',
+    verified:'सत्यापित',trust_score:'विश्वास स्कोर',
+    welcome_artisan:'स्वागत है, शिल्पकार',
+    sign_in_prompt:'अपनी कला बेचने के लिए साइन इन करें',
+    secure_signin:'Google खाते से सुरक्षित साइन-इन',
+    your_location:'आपका स्थान',or:'या',
+    continue_google:'Google से जारी रखें',
+    wallet:'वॉलेट',refer:'रेफ़र और कमाएं',
+    product:'उत्पाद',description:'विवरण',tags:'टैग',
+    list_new_craft:'नई कला जोड़ें',category:'श्रेणी',title:'शीर्षक',
+    title_hint:'जैसे "बनारसी सिल्क साड़ी"',
+    desc_hint:'इस कृति की कहानी बोलें या लिखें…',
+    price:'कीमत (₹)',price_hint:'जैसे 1200',
+    save_listing:'सूची प्रकाशित करें',remove_bg:'बैकग्राउंड हटाएं',
+    analyzing:'AI विश्लेषण…',take_photo:'फ़ोटो लें',from_gallery:'गैलरी से',
+    use_my_location:'मेरा स्थान उपयोग करें',set_location:'अपना स्थान सेट करें',
+    pick_on_map:'नक्शे पर चुनें',
+    mic_unavailable:'इस डिवाइस पर आवाज़ उपलब्ध नहीं',
+    privacy:'गोपनीयता',feedback:'प्रतिक्रिया भेजें',
+    notification_prefs:'सूचना प्राथमिकताएं',
+  },
+  te:{
+    brand:'కలాకృతి',tagline:'సంప్రదాయం వ్యక్తీకరణను కలిసే చోటు',
+    tab_shop:'దుకాణం',tab_add:'అప్‌లోడ్',tab_cart:'బండి',tab_profile:'మీరు',
+    search_hint:'చీరలు, కుర్తీలు, ఆభరణాలు…',
+    fair_feed:'న్యాయమైన ఫీడ్ · ప్రతి విక్రేతకు సమానం',
+    new_badge:'కొత్తది',add_to_cart:'బండికి జోడించు',buy_now:'ఇప్పుడే కొనండి',
+    add_more:'మరిన్ని',photos:'ఫోటోలు',voice_lang:'వాయిస్ భాష',
+    empty_cart:'బండి ఖాళీగా ఉంది',grand_total:'మొత్తం యోగం',
+    checkout:'చెక్అవుట్',order_placed:'ఆర్డర్ పూర్తయింది!',
+    my_shop:'నా దుకాణం',my_products:'నా ఉత్పత్తులు',no_products:'ఇంకా ఉత్పత్తులు లేవు.',
+    fill_required:'శీర్షిక, ధర, ఫోటో నింపండి',
+    uploaded:'ఉత్పత్తి ప్రచురించబడింది!',no_match:'ఉత్పత్తులు కనుగొనబడలేదు.',
+    loading:'లోడ్ అవుతోంది…',logout:'సైన్ అవుట్',settings:'సెట్టింగ్‌లు',
+    display_name:'ప్రదర్శన పేరు',bio:'మీ కళ గురించి',
+    save_changes:'మార్పులు సేవ్ చేయి',saved:'సేవ్ అయింది!',
+    language:'భాష',account:'ఖాతా',
+    chat_title:'కలాకృతి సహాయకుడు',chat_hint:'ధర, చిట్కాలు…',
+    chat_empty:'ఏదైనా అడగండి — ధర సలహా.',
+    location:'స్థానం',delivery:'డెలివరీ సమాచారం',
+    delete:'తొలగించు',delete_confirm:'ఈ జాబితాను తొలగించాలా?',
+    cancel:'రద్దు',delete_btn:'తొలగించు',
+    orders:'ఆర్డర్లు',wishlist:'ఇష్టమైనవి',no_orders:'ఆర్డర్లు లేవు',
+    no_wishlist:'ఇష్టమైనవి ఖాళీ',
+    ai_filled:'AI ఫారమ్ నింపింది',
+    reviews:'సమీక్షలు',write_review:'సమీక్ష రాయండి',
+    no_reviews:'ఇంకా సమీక్షలు లేవు.',
+    rating:'రేటింగ్',your_review:'మీ సమీక్ష',
+    submit_review:'సమీక్ష సమర్పించు',review_added:'సమీక్ష సమర్పించబడింది!',
+    seller:'విక్రేత',seller_products:'ఈ విక్రేత ఉత్పత్తులు',
+    notifications:'నోటిఫికేషన్లు',no_notifications:'ఇంకా నోటిఫికేషన్లు లేవు',
+    addresses:'చిరునామాలు',add_address:'చిరునామా జోడించు',
+    edit_address:'చిరునామా సవరించు',
+    full_name:'పూర్తి పేరు',phone:'ఫోన్',address_line:'చిరునామా',
+    city:'నగరం',state:'రాష్ట్రం',pincode:'పిన్‌కోడ్',
+    save_address:'చిరునామా సేవ్ చేయి',default_address:'డిఫాల్ట్',
+    set_default:'డిఫాల్ట్‌గా సెట్ చేయి',
+    payment:'చెల్లింపు',payment_method:'చెల్లింపు పద్ధతి',
+    cod:'క్యాష్ ఆన్ డెలివరీ',upi:'UPI',card:'క్రెడిట్ / డెబిట్ కార్డ్',
+    netbanking:'నెట్ బ్యాంకింగ్',
+    place_order:'ఆర్డర్ పెట్టు',order_confirmed:'ఆర్డర్ నిర్ధారించబడింది!',
+    order_id:'ఆర్డర్ ID',track_order:'ఆర్డర్ ట్రాక్ చేయి',
+    order_tracking:'ఆర్డర్ ట్రాకింగ్',
+    confirmed:'నిర్ధారించబడింది',packed:'ప్యాక్ చేయబడింది',
+    shipped:'పంపబడింది',delivered:'డెలివరీ చేయబడింది',
+    out_for_delivery:'డెలివరీకి బయలుదేరింది',
+    help:'సహాయం & FAQ',about:'కలాకృతి గురించి',coupons:'కూపన్లు',
+    apply_coupon:'కూపన్ వర్తించు',coupon_applied:'కూపన్ వర్తించబడింది!',
+    invalid_coupon:'చెల్లని కూపన్ కోడ్',
+    subtotal:'ఉప మొత్తం',discount:'తగ్గింపు',
+    delivery_fee:'డెలివరీ',trending:'ట్రెండింగ్',recently_viewed:'ఇటీవల చూసినవి',
+    price_low:'ధర: తక్కువ → ఎక్కువ',price_high:'ధర: ఎక్కువ → తక్కువ',
+    newest:'కొత్తవి ముందు',rating_high:'టాప్ రేటెడ్',
+    filters:'ఫిల్టర్లు',sort_by:'క్రమబద్ధీకరించు',
+    results:'ఫలితాలు',
+    skip:'దాటవేయి',next:'తదుపరి',get_started:'ప్రారంభించు',
+    onboard_1_title:'ప్రామాణిక కళను కనుగొనండి',
+    onboard_1_desc:'భారతదేశం నలుమూలల నుండి ఎంపిక చేసిన చీరలు, ఆభరణాలు.',
+    onboard_2_title:'AI-ఆధారిత జాబితాలు',
+    onboard_2_desc:'ఫోటో తీసి, కథ చెప్పండి — మా AI జాబితా రాస్తుంది.',
+    onboard_3_title:'ప్రతి విక్రేతకు న్యాయం',
+    onboard_3_desc:'ప్రతి కళాకారుడికి సమాన దృశ్యమానత.',
+    map:'కళాకారుల మ్యాప్',calendar:'క్యాలెండర్',
+    near_me:'నా దగ్గర',near_me_hint:'300 కిమీ లోపు ఉత్పత్తులు',
+    location_set:'స్థానం సెట్ అయింది!',
+    delivery_eta:'డెలివరీ సమయం',from_you:'మీ నుండి',
+    delivery_charge:'డెలివరీ ఛార్జ్',free_delivery:'ఉచిత డెలివరీ',
+    shipping_from:'ఇక్కడ నుండి పంపుతారు',voice_listing:'వాయిస్ లిస్టింగ్',
+    speak_now:'ఇప్పుడు మాట్లాడండి…',translating:'అనువదిస్తోంది…',
+    verified:'ధృవీకరించబడింది',trust_score:'నమ్మకం స్కోరు',
+    welcome_artisan:'స్వాగతం, కళాకారుడా',
+    sign_in_prompt:'మీ కళను అమ్మడానికి సైన్ ఇన్ చేయండి',
+    secure_signin:'Google ఖాతాతో సురక్షిత సైన్-ఇన్',
+    your_location:'మీ స్థానం',or:'లేదా',
+    continue_google:'Google తో కొనసాగించు',
+    wallet:'వాలెట్',refer:'రెఫర్ & సంపాదించు',
+    product:'ఉత్పత్తి',description:'వివరణ',tags:'ట్యాగ్‌లు',
+    list_new_craft:'కొత్త కళ జోడించు',category:'వర్గం',title:'శీర్షిక',
+    title_hint:'ఉదా: "బనారస్ సిల్క్ చీర"',
+    desc_hint:'ఈ కళ గురించి మాట్లాడండి…',
+    price:'ధర (₹)',price_hint:'ఉదా: 1200',
+    save_listing:'జాబితా ప్రచురించు',remove_bg:'బ్యాక్‌గ్రౌండ్ తీసివేయి',
+    analyzing:'AI విశ్లేషిస్తోంది…',take_photo:'ఫోటో తీసుకో',
+    from_gallery:'గ్యాలరీ నుండి',
+    use_my_location:'నా స్థానం వాడు',set_location:'మీ స్థానం సెట్ చేయి',
+    pick_on_map:'మ్యాప్‌లో ఎంచుకో',
+    mic_unavailable:'ఈ పరికరంలో వాయిస్ అందుబాటులో లేదు',
+    privacy:'గోప్యత',feedback:'అభిప్రాయం పంపండి',
+    notification_prefs:'నోటిఫికేషన్ ప్రాధాన్యతలు',
+  }
+};
+
+/* ─────── Categories ─────── */
+const CATEGORIES = ['All','Sarees','Dresses','Handicrafts','Jewelry'];
+const CAT_EMOJI = {Sarees:'🥻',Dresses:'👗',Handicrafts:'🏺',Jewelry:'💎',All:'🛍️'};
+const CAT_COLORS = {
+  Sarees:['#7A2331','#5A1825'],
+  Dresses:['#C1652F','#8B3A1A'],
+  Handicrafts:['#3F6E52','#2A4A38'],
+  Jewelry:['#D9A441','#B8862E'],
+};
+
+/* ─────── Coupons ─────── */
+const COUPONS = [
+  {code:'WELCOME10',percent:10,maxDiscount:500,minCart:1000,description:'10% off up to ₹500 on orders above ₹1000'},
+  {code:'FESTIVE20',percent:20,maxDiscount:1500,minCart:3000,description:'20% off up to ₹1500 on orders above ₹3000'},
+  {code:'HANDLOOM15',percent:15,maxDiscount:800,minCart:1500,description:'15% off up to ₹800 on orders above ₹1500'},
+];
+
+/* ─────── Seed products ─────── */
+const SEED_PRODUCTS = [
+  {id:'p1',title:'Banarasi Silk Saree',description:'Handwoven pure silk saree with intricate zari work. A timeless heirloom piece crafted by master weavers of Varanasi using traditional techniques passed down through generations.',category:'Sarees',price:4500,sellerId:'s1',sellerName:'Meera Devi',location:'Varanasi, UP',rating:4.8,ratingCount:24,views:340,createdAt:Date.now()-86400000*2,keywords:['silk','banarasi','wedding','zari'],lat:25.3176,lng:82.9739},
+  {id:'p2',title:'Kanjivaram Silk Saree',description:'Pure mulberry silk with contrast border and traditional temple design. Woven in Kanchipuram with hand-picked silk threads.',category:'Sarees',price:7800,sellerId:'s3',sellerName:'Lakshmi Weaves',location:'Kanchipuram, TN',rating:4.9,ratingCount:42,views:512,createdAt:Date.now()-86400000*5,keywords:['kanjivaram','silk','temple','bridal'],lat:12.8342,lng:79.7036},
+  {id:'p3',title:'Pochampally Ikat Saree',description:'Geometric ikat patterns in vibrant natural dyes. Handwoven by traditional weavers of Pochampally using the tie-and-dye technique.',category:'Sarees',price:3200,sellerId:'s2',sellerName:'Ravi Kumar',location:'Pochampally, TS',rating:4.6,ratingCount:18,views:220,createdAt:Date.now()-86400000*8,keywords:['ikat','pochampally','geometric','handloom'],lat:17.5626,lng:78.7},
+  {id:'p4',title:'Phulkari Dupatta',description:'Vibrant hand-embroidered phulkari dupatta in traditional Punjabi style. Each stitch tells a story of celebration.',category:'Dresses',price:1800,sellerId:'s5',sellerName:'Punjab Handlooms',location:'Amritsar, PB',rating:4.7,ratingCount:16,views:180,createdAt:Date.now()-86400000*3,keywords:['phulkari','embroidery','dupatta','punjabi'],lat:31.634,lng:74.8723},
+  {id:'p5',title:'Bandhani Silk Kurta',description:'Pure silk kurta with traditional bandhani tie-dye patterns from Gujarat. Lightweight and perfect for festive occasions.',category:'Dresses',price:2400,sellerId:'s6',sellerName:'Gujarat Weaves',location:'Bhuj, GJ',rating:4.5,ratingCount:11,views:145,createdAt:Date.now()-86400000*12,keywords:['bandhani','kurta','silk','gujarat'],lat:23.242,lng:69.6669},
+  {id:'p6',title:'Brass Dancing Nataraja',description:'Handcrafted brass idol of Lord Nataraja, symbol of cosmic dance. Made by traditional brass artisans of Moradabad.',category:'Handicrafts',price:3500,sellerId:'s4',sellerName:'Anita Crafts',location:'Moradabad, UP',rating:4.8,ratingCount:9,views:98,createdAt:Date.now()-86400000*6,keywords:['brass','nataraja','idol','handicraft'],lat:28.8386,lng:78.7733},
+  {id:'p7',title:'Terracotta Horse',description:'Bengal terracotta horse — the iconic Bankura craft. Hand-molded and fired in traditional kilns.',category:'Handicrafts',price:1200,sellerId:'s7',sellerName:'Bengal Crafts',location:'Kolkata, WB',rating:4.4,ratingCount:7,views:76,createdAt:Date.now()-86400000*15,keywords:['terracotta','bankura','horse','bengal'],lat:22.5726,lng:88.3639},
+  {id:'p8',title:'Kundan Choker Set',description:'Traditional Kundan choker with matching earrings. Hand-set stones in gold-plated silver. Jaipur craftsmanship.',category:'Jewelry',price:5800,sellerId:'s8',sellerName:'Jaipur Arts',location:'Jaipur, RJ',rating:4.9,ratingCount:31,views:420,createdAt:Date.now()-86400000*1,keywords:['kundan','choker','jewelry','jaipur'],lat:26.9124,lng:75.7873},
+  {id:'p9',title:'Silver Filigree Earrings',description:'Delicate silver filigree earrings in the ancient Cuttack tradition. Intricate wirework with floral motifs.',category:'Jewelry',price:2200,sellerId:'s9',sellerName:'Odisha Ikat',location:'Sambalpur, OD',rating:4.6,ratingCount:13,views:130,createdAt:Date.now()-86400000*4,keywords:['silver','filigree','earrings','odisha'],lat:21.4669,lng:83.9812},
+  {id:'p10',title:'Chanderi Silk Saree',description:'Lightweight Chanderi silk saree with golden zari border. Perfect for summer weddings and festive occasions.',category:'Sarees',price:3800,sellerId:'s10',sellerName:'Chanderi Looms',location:'Chanderi, MP',rating:4.7,ratingCount:22,views:265,createdAt:Date.now()-86400000*7,keywords:['chanderi','silk','zari','mp'],lat:24.7138,lng:78.1372},
+];
+
+/* ═══════════════ STATE ═══════════════ */
+const STORAGE_KEY = 'kalakriti_web_v1';
+const DEFAULT_STATE = {
+  lang:'en',
+  user:null,
+  onboarded:false,
+  products:[],
+  cart:{},
+  wishlist:[],
+  orders:[],
+  addresses:[],
+  notifications:[],
+  recentlyViewed:[],
+  coins:250,
+  userLat:0, userLng:0, userCity:'',
+  reviews:{},
+  screen:'splash',
+  tab:'shop',
+  stack:[],
+};
+
+let state = load();
+
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      return {...DEFAULT_STATE, ...parsed, screen:'splash', stack:[]};
+    }
+  }catch(e){}
+  const fresh = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  fresh.products = SEED_PRODUCTS.map(p=>({...p}));
+  return fresh;
+}
+function save(){
+  try{
+    const copy = {...state, screen:'main', stack:[]};
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(copy));
+  }catch(e){}
+}
+
+/* ═══════════════ HELPERS ═══════════════ */
+function t(k){ return (I18N[state.lang] && I18N[state.lang][k]) || I18N.en[k] || k; }
+function uid(){ return 'id_' + Math.random().toString(36).slice(2,10) + Date.now().toString(36); }
+function rupees(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+function esc(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function productGradient(p){
+  const c = CAT_COLORS[p.category] || ['#1F3B4D','#0F2530'];
+  return `background:linear-gradient(135deg,${c[0]},${c[1]})`;
+}
+function catEmoji(c){ return CAT_EMOJI[c] || '🛍️'; }
+
+function stars(rating, size){
+  size = size || 14;
+  let html = '<span class="stars" style="font-size:'+size+'px">';
+  for(let i=0;i<5;i++){
+    const v = rating - i;
+    if(v >= 1) html += '★';
+    else if(v >= 0.5) html += '⯨';
+    else html += '☆';
+  }
+  html += '</span>';
+  return html;
+}
+
+function toast(msg, color){
+  const old = document.querySelector('.toast');
+  if(old) old.remove();
+  const el = document.createElement('div');
+  el.className = 'toast';
+  if(color) el.style.background = color;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2200);
+}
+
+function getProduct(id){ return state.products.find(p=>p.id===id); }
+
+/* ─── Cart helpers ─── */
+function cartCount(){ return Object.values(state.cart).reduce((a,b)=>a+b,0); }
+function cartTotal(){
+  let t = 0;
+  for(const id in state.cart){
+    const p = getProduct(id);
+    if(p) t += p.price * state.cart[id];
+  }
+  return t;
+}
+function hasLocation(){ return state.userLat !== 0 || state.userLng !== 0; }
+
+function haversine(lat1,lon1,lat2,lon2){
+  const R=6371, toRad=d=>d*Math.PI/180;
+  const dLat=toRad(lat2-lat1), dLon=toRad(lon2-lon1);
+  const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function distanceToProduct(p){
+  if(!hasLocation() || !p.lat || !p.lng) return 800;
+  return haversine(state.userLat,state.userLng,p.lat,p.lng);
+}
+function deliveryDaysFor(km){
+  if(km<=200) return 2; if(km<=500) return 3; if(km<=800) return 4;
+  if(km<=1200) return 5; if(km<=1800) return 6; if(km<=2500) return 7;
+  return 8;
+}
+function deliveryFeeFor(km){
+  if(km<=100) return 0; if(km<=500) return 40; if(km<=1200) return 80;
+  if(km<=2000) return 120; return 180;
+}
+function cartDeliveryFee(){
+  if(cartCount()===0) return 0;
+  let max = 0;
+  for(const id in state.cart){
+    const p = getProduct(id);
+    if(p){ const f = deliveryFeeFor(distanceToProduct(p)); if(f>max) max=f; }
+  }
+  return max;
+}
+function cartDeliveryDays(){
+  let max = 0;
+  for(const id in state.cart){
+    const p = getProduct(id);
+    if(p){ const d = deliveryDaysFor(distanceToProduct(p)); if(d>max) max=d; }
+  }
+  return max;
+}
+
+function nearestCity(lat,lng){
+  const cities = {
+    'Delhi, DL':[28.6139,77.2090],'Mumbai, MH':[19.0760,72.8777],
+    'Kolkata, WB':[22.5726,88.3639],'Chennai, TN':[13.0827,80.2707],
+    'Bengaluru, KA':[12.9716,77.5946],'Hyderabad, TS':[17.3850,78.4867],
+    'Jaipur, RJ':[26.9124,75.7873],'Ahmedabad, GJ':[23.0225,72.5714],
+    'Varanasi, UP':[25.3176,82.9739],'Kanchipuram, TN':[12.8342,79.7036],
+    'Srinagar, JK':[34.0837,74.7973],'Kochi, KL':[9.9312,76.2673],
+    'Amritsar, PB':[31.6340,74.8723],'Pochampally, TS':[17.5626,78.7000],
+    'Moradabad, UP':[28.8386,78.7733],'Bhuj, GJ':[23.2420,69.6669],
+    'Sambalpur, OD':[21.4669,83.9812],'Chanderi, MP':[24.7138,78.1372],
+  };
+  let best = Infinity, name = 'India';
+  for(const c in cities){
+    const d = haversine(lat,lng,cities[c][0],cities[c][1]);
+    if(d < best){ best = d; name = c; }
+  }
+  return name;
+}
+
+/* ─── Notifications ─── */
+function addNotif(title, body){
+  state.notifications.unshift({id:uid(), title, body, createdAt:Date.now(), read:false});
+}
+function unreadNotifs(){ return state.notifications.filter(n=>!n.read).length; }
+
+/* ═══════════════ AI BACKEND ═══════════════ */
+const AI_BASE = 'https://kalak-shetra-ai.onrender.com';
+
+async function aiAnalyze(imageDataUrl, userDesc){
+  try{
+    const blob = await (await fetch(imageDataUrl)).blob();
+    const form = new FormData();
+    form.append('file', blob, 'p.jpg');
+    form.append('user_desc', userDesc || '');
+    const res = await fetch(AI_BASE + '/analyze-product', {method:'POST', body:form});
+    if(!res.ok) return null;
+    return await res.json();
+  }catch(e){ console.warn('AI analyze failed', e); return null; }
+}
+
+async function aiChat(messages){
+  try{
+    const res = await fetch(AI_BASE + '/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages}),
+    });
+    if(!res.ok) return null;
+    const d = await res.json();
+    return d.reply;
+  }catch(e){ console.warn('AI chat failed', e); return null; }
+}
+
+async function aiVoiceListing(text, sourceLang){
+  try{
+    const res = await fetch(AI_BASE + '/translate-and-analyze', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({text, source_lang:sourceLang}),
+    });
+    if(!res.ok) return null;
+    return await res.json();
+  }catch(e){ console.warn('AI voice failed', e); return null; }
+}
+
+/* ═══════════════ ROUTER ═══════════════ */
+function go(screen){ state.screen = screen; render(); }
+function push(screen, params){
+  state.stack.push({screen, params:params||{}});
+  render();
+}
+function pop(){ state.stack.pop(); render(); }
+function setTab(tab){ state.tab = tab; render(); }
+
+/* ═══════════════ RENDER ═══════════════ */
+const app = document.getElementById('app');
+
+function render(){
+  let html = '';
+  if(state.screen === 'splash') html = viewSplash();
+  else if(state.screen === 'onboarding') html = viewOnboard();
+  else if(state.screen === 'login') html = viewLogin();
+  else html = viewMain();
+
+  if(state.stack.length){
+    const top = state.stack[state.stack.length-1];
+    html += viewOverlay(top);
+  }
+
+  app.innerHTML = html;
+  save();
+}
+
+function setInner(html){
+  let full = '';
+  if(state.screen === 'splash') full = viewSplash();
+  else if(state.screen === 'onboarding') full = viewOnboard();
+  else if(state.screen === 'login') full = viewLogin();
+  else full = viewMain();
+  if(state.stack.length){
+    const top = state.stack[state.stack.length-1];
+    full += viewOverlay(top);
+  }
+  app.innerHTML = full;
+}
+
+/* ═══════════════ SPLASH ═══════════════ */
+function viewSplash(){
+  return `
+  <div class="splash doodle">
+    <div class="splash-logo">
+      <div class="splash-ring"></div>
+      <div class="splash-ring"></div>
+      <div class="splash-ring"></div>
+      <div class="splash-core">🌸</div>
+    </div>
+    <div class="splash-text">
+      <h1>कलाकृति</h1>
+      <h2>KALAKRITI</h2>
+      <p>Where tradition meets expression</p>
+    </div>
+    <div class="splash-dots"><span></span><span></span><span></span></div>
+  </div>`;
+}
+
+/* ═══════════════ ONBOARDING ═══════════════ */
+let onboardPage = 0;
+function viewOnboard(){
+  const pages = [
+    {e:'🌸', color:'#7A2331', bg:'rgba(122,35,49,.12)', title:t('onboard_1_title'), desc:t('onboard_1_desc')},
+    {e:'✨', color:'#D9A441', bg:'rgba(217,164,65,.15)', title:t('onboard_2_title'), desc:t('onboard_2_desc')},
+    {e:'⚖️', color:'#3F6E52', bg:'rgba(63,110,82,.12)', title:t('onboard_3_title'), desc:t('onboard_3_desc')},
+  ];
+  const p = pages[onboardPage];
+  return `
+  <div class="onboard doodle">
+    <div class="onboard-track">
+      <div class="onboard-page">
+        <div class="onboard-illus" style="background:${p.bg};border-color:${p.color};color:${p.color}">${p.e}</div>
+        <h3 style="color:${p.color}">${esc(p.title)}</h3>
+        <p>${esc(p.desc)}</p>
+      </div>
+    </div>
+    <div class="onboard-foot">
+      <div class="onboard-dots">
+        ${pages.map((_,i)=>`<i class="${i===onboardPage?'on':''}"></i>`).join('')}
+      </div>
+      <div style="flex:1"></div>
+      <button class="btn ghost" onclick="finishOnboard()">${esc(t('skip'))}</button>
+      <button class="btn" onclick="nextOnboard()">${onboardPage===pages.length-1?esc(t('get_started')):esc(t('next'))}</button>
+    </div>
+  </div>`;
+}
+function nextOnboard(){
+  if(onboardPage < 2){ onboardPage++; setInner(); }
+  else finishOnboard();
+}
+function finishOnboard(){
+  state.onboarded = true;
+  save();
+  go('login');
+}
+
+/* ═══════════════ LOGIN ═══════════════ */
+function viewLogin(){
+  return `
+  <div class="login doodle">
+    <div class="login-inner">
+      <div class="login-logo">🌸</div>
+      <h1>कलाकृति</h1>
+      <h2>KALAKRITI</h2>
+      <p class="tag">${esc(t('tagline'))}</p>
+      <p class="welcome">${esc(t('welcome_artisan'))}</p>
+      <p class="sub">${esc(t('sign_in_prompt'))}</p>
+      <button class="google-btn" onclick="mockLogin()">
+        <span class="google-g">G</span>
+        ${esc(t('continue_google'))}
+      </button>
+      <div class="secure-note">🔒 ${esc(t('secure_signin'))}</div>
+    </div>
+  </div>`;
+}
+function mockLogin(){
+  state.user = {
+    uid: 'demo_' + Math.random().toString(36).slice(2,8),
+    email: 'artisan@kalakriti.app',
+    displayName: 'Demo Artisan',
+    bio:'Traditional weaver from Varanasi',
+    photoUrl: null,
+  };
+  save();
+  go('main');
+}
+
+/* ═══════════════ MAIN SHELL ═══════════════ */
+function viewMain(){
+  const tabs = [
+    {id:'shop', ic:'🛍️', label:t('tab_shop')},
+    {id:'upload', ic:'📷', label:t('tab_add')},
+    {id:'cart', ic:'🛒', label:t('tab_cart')},
+    {id:'wallet', ic:'👛', label:t('wallet')},
+    {id:'profile', ic:'👤', label:t('tab_profile')},
+  ];
+  const cc = cartCount();
+  const un = unreadNotifs();
+  let body = '';
+  if(state.tab === 'shop') body = viewShop();
+  else if(state.tab === 'upload') body = viewUpload();
+  else if(state.tab === 'cart') body = viewCart();
+  else if(state.tab === 'wallet') body = viewWallet();
+  else body = viewProfile();
+
+  return `
+  <div class="appbar">
+    <div class="title">🌸 Kalakriti</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="push('notifications')">
+      🔔${un>0?'<span class="dot-badge"></span>':''}
+    </button>
+    <button class="icon-btn" onclick="push('chat')">✨</button>
+  </div>
+  <div class="screen doodle" id="screen">${body}</div>
+  <div class="bottomnav">
+    ${tabs.map(tb=>`
+      <button class="${state.tab===tb.id?'on':''}" onclick="setTab('${tb.id}')">
+        <span class="nav-ic">${tb.ic}</span>
+        <span>${esc(tb.label)}</span>
+        ${tb.id==='cart'&&cc>0?`<span class="cart-badge">${cc}</span>`:''}
+      </button>`).join('')}
+  </div>`;
+}
+
+/* ═══════════════ SHOP ═══════════════ */
+let shopQuery = '';
+let shopCat = 'All';
+let shopNearMe = false;
+let shopSortDist = false;
+let shopSort = 'recommended';
+
+function viewShop(){
+  const feed = filteredFeed();
+  return `
+  ${!hasLocation() ? `
+    <div class="banner" onclick="push('setLocation')" style="cursor:pointer">
+      <span>📍</span>
+      <span style="flex:1">Set your location to see delivery ETA</span>
+      <b>Set</b>
+    </div>` : `
+    <div class="banner" style="background:rgba(63,110,82,.1);border-color:rgba(63,110,82,.5);color:#3F6E52" onclick="push('setLocation')">
+      <span>📍</span>
+      <span style="flex:1">Delivering to <b>${esc(state.userCity)}</b></span>
+      <b>Change</b>
+    </div>`}
+
+  <div class="search-wrap">
+    <div class="search">
+      <span>🔍</span>
+      <input id="shopSearch" placeholder="${esc(t('search_hint'))}" value="${esc(shopQuery)}"
+        oninput="shopQuery=this.value;refreshList()">
+    </div>
+  </div>
+
+  <div class="chips">
+    ${CATEGORIES.map(c=>`
+      <button class="chip ${shopCat===c?'on':''}" onclick="shopCat='${c}';refreshList()">
+        ${catEmoji(c)} ${c}
+      </button>`).join('')}
+  </div>
+
+  <div class="toggle-row">
+    <button class="toggle-chip ${shopNearMe?'on':''}" onclick="toggleNearMe()">📍 ${esc(t('near_me'))}</button>
+    <button class="toggle-chip ${shopSortDist?'on':''}" onclick="toggleSortDist()">↕ Sort: Nearest</button>
+    <button class="toggle-chip ${shopSort==='price_low'?'on':''}" onclick="setSort('price_low')">₹ Low → High</button>
+    <button class="toggle-chip ${shopSort==='price_high'?'on':''}" onclick="setSort('price_high')">₹ High → Low</button>
+    <button class="toggle-chip ${shopSort==='rating'?'on':''}" onclick="setSort('rating')">⭐ Top rated</button>
+  </div>
+
+  <div class="banner" style="background:linear-gradient(90deg,rgba(217,164,65,.18),rgba(217,164,65,.08))">
+    <span>⚖️</span>
+    <span>${esc(t('fair_feed'))}</span>
+  </div>
+
+  ${trendingSection()}
+  ${recentSection()}
+
+  <div id="productGrid">${renderGrid(feed)}</div>`;
+}
+
+function filteredFeed(){
+  let list = [...state.products];
+  if(shopCat !== 'All') list = list.filter(p=>p.category===shopCat);
+  if(shopNearMe && hasLocation()) list = list.filter(p=>distanceToProduct(p)<=300);
+  if(shopQuery){
+    const q = shopQuery.toLowerCase();
+    list = list.filter(p=>
+      p.title.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.sellerName.toLowerCase().includes(q) ||
+      (p.keywords||[]).some(k=>k.includes(q))
+    );
+  }
+  if(shopSort === 'price_low') list.sort((a,b)=>a.price-b.price);
+  else if(shopSort === 'price_high') list.sort((a,b)=>b.price-a.price);
+  else if(shopSort === 'rating') list.sort((a,b)=>b.rating-a.rating);
+  else if(shopSortDist && hasLocation()) list.sort((a,b)=>distanceToProduct(a)-distanceToProduct(b));
+  else list.sort((a,b)=>b.createdAt-a.createdAt);
+  return list;
+}
+
+function renderGrid(list){
+  if(list.length === 0){
+    return `<div class="empty"><div class="empty-circle">🔍</div>
+      <p>${esc(t('no_match'))}</p></div>`;
+  }
+  return `<div class="grid">${list.map(productCard).join('')}</div>`;
+}
+
+function productCard(p){
+  const wished = state.wishlist.includes(p.id);
+  const isNew = Date.now() - p.createdAt < 7*86400000;
+  const km = distanceToProduct(p);
+  const showDist = hasLocation() && p.lat;
+  return `
+  <div class="pcard" onclick="openProduct('${p.id}')">
+    <div class="pcard-img" style="${productGradient(p)}">
+      ${catEmoji(p.category)}
+      ${isNew?`<span class="badge-new">${esc(t('new_badge'))}</span>`:''}
+      <span class="badge-cat">${esc(p.category)}</span>
+      <button class="wish-btn" onclick="event.stopPropagation();toggleWish('${p.id}')">
+        ${wished?'❤️':'🤍'}
+      </button>
+    </div>
+    <div class="pcard-body">
+      <div class="pcard-title">${esc(p.title)}</div>
+      <div class="pcard-seller">${esc(p.sellerName)}</div>
+      ${showDist?`<div style="font-size:10px;color:#3F6E52;font-weight:600">📍 ${km.toFixed(0)} km · ${deliveryDaysFor(km)}d</div>`:''}
+      ${p.ratingCount>0?`<div class="pcard-rating">${stars(p.rating,11)} ${p.rating.toFixed(1)}</div>`:''}
+      <div class="pcard-row">
+        <span class="pcard-price">${rupees(p.price)}</span>
+        <button class="pcard-add" onclick="event.stopPropagation();addToCart('${p.id}')">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function trendingSection(){
+  const list = [...state.products].sort((a,b)=>b.views-a.views).slice(0,6);
+  if(!list.length) return '';
+  return `
+  <div class="section-title">${esc(t('trending'))}</div>
+  <div style="display:flex;gap:10px;overflow-x:auto;padding:0 14px 10px">
+    ${list.map(p=>`
+      <div style="min-width:150px;max-width:150px" onclick="openProduct('${p.id}')">${productCard(p)}</div>
+    `).join('')}
+  </div>`;
+}
+
+function recentSection(){
+  const list = state.recentlyViewed.map(id=>getProduct(id)).filter(Boolean).slice(0,6);
+  if(!list.length) return '';
+  return `
+  <div class="section-title">${esc(t('recently_viewed'))}</div>
+  <div style="display:flex;gap:10px;overflow-x:auto;padding:0 14px 10px">
+    ${list.map(p=>`
+      <div style="min-width:150px;max-width:150px" onclick="openProduct('${p.id}')">${productCard(p)}</div>
+    `).join('')}
+  </div>`;
+}
+
+function refreshList(){
+  const g = document.getElementById('productGrid');
+  if(g) g.innerHTML = renderGrid(filteredFeed());
+  // also update chips state
+  setInner();
+}
+
+function toggleNearMe(){
+  if(!hasLocation()){ push('setLocation'); return; }
+  shopNearMe = !shopNearMe; setInner();
+}
+function toggleSortDist(){
+  if(!hasLocation()){ push('setLocation'); return; }
+  shopSortDist = !shopSortDist; setInner();
+}
+function setSort(s){
+  shopSort = shopSort === s ? 'recommended' : s;
+  setInner();
+}
+
+function toggleWish(id){
+  const i = state.wishlist.indexOf(id);
+  if(i>=0) state.wishlist.splice(i,1); else state.wishlist.push(id);
+  setInner();
+}
+
+function addToCart(id){
+  state.cart[id] = (state.cart[id]||0) + 1;
+  const p = getProduct(id);
+  toast((p?p.title:'Item') + ' ' + t('added_to_cart'), '#3F6E52');
+  setInner();
+}
+
+function openProduct(id){
+  const p = getProduct(id);
+  if(!p) return;
+  state.recentlyViewed = [id, ...state.recentlyViewed.filter(x=>x!==id)].slice(0,20);
+  push('product', {id});
+  save();
+}
+
+/* ═══════════════ PRODUCT DETAIL ═══════════════ */
+function viewProductDetail(p){
+  const wished = state.wishlist.includes(p.id);
+  const km = distanceToProduct(p);
+  const hasLoc = hasLocation() && p.lat;
+  const days = hasLoc ? deliveryDaysFor(km) : 4;
+  const fee = hasLoc ? deliveryFeeFor(km) : 40;
+  const reviews = state.reviews[p.id] || [];
+
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('product'))}</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="shareProduct('${p.id}')">↗</button>
+    <button class="icon-btn" onclick="toggleWishReload('${p.id}')">${wished?'❤️':'🤍'}</button>
+  </div>
+  <div class="screen doodle">
+    <div class="detail-hero" style="${productGradient(p)}">
+      ${catEmoji(p.category)}
+      ${Date.now()-p.createdAt<7*86400000?`<span class="badge-new">${esc(t('new_badge'))}</span>`:''}
+    </div>
+    <div class="detail-body">
+      <span class="detail-cat">${esc(p.category)}</span>
+      <h2 class="detail-title">${esc(p.title)}</h2>
+      ${p.ratingCount>0?`<div style="display:flex;gap:8px;align-items:center;font-size:12px;color:#6B4F3A">
+        ${stars(p.rating,16)} <span>(${p.ratingCount})</span>
+        <span>·</span> <span>👁 ${p.views} views</span>
+      </div>`:''}
+
+      <div style="display:flex;gap:8px">
+        <button class="btn ghost" style="flex:1;font-size:12px" onclick="push('seller',{sellerId:'${p.sellerId}',sellerName:'${esc(p.sellerName).replace(/'/g,"&#39;")}'})">
+          🏪 ${esc(t('seller_products'))}
+        </button>
+        <button class="btn" style="flex:1;font-size:12px" onclick="push('chatSeller',{sellerId:'${p.sellerId}',sellerName:'${esc(p.sellerName).replace(/'/g,"&#39;")}'})">
+          💬 Chat
+        </button>
+      </div>
+
+      <div class="detail-price">${rupees(p.price)}</div>
+
+      <div class="delivery-box">
+        <div class="row">🚚 <b>${esc(t('delivery_eta'))}: ${days} day${days!==1?'s':''} · ${hasLoc?km.toFixed(0)+' km':''}</b></div>
+        <div class="row">📦 ${esc(t('delivery_charge'))}: ${fee===0?'<b style="color:#3F6E52">'+esc(t('free_delivery'))+'</b>':rupees(fee)}</div>
+        ${p.location?`<div class="row">🏬 ${esc(t('shipping_from'))}: ${esc(p.location)}</div>`:''}
+        ${!hasLocation()?`<button class="btn ghost" style="align-self:flex-start;padding:6px 12px;font-size:12px" onclick="push('setLocation')">📍 Set location</button>`:''}
+      </div>
+
+      <div class="section-title">${esc(t('description'))}</div>
+      <p class="detail-desc">${esc(p.description)}</p>
+
+      ${p.keywords && p.keywords.length ? `
+        <div class="section-title">${esc(t('tags'))}</div>
+        <div class="pill-row">${p.keywords.map(k=>`<span class="pill">#${esc(k)}</span>`).join('')}</div>
+      `:''}
+
+      <div class="section-title">${esc(t('reviews'))} (${reviews.length})</div>
+      ${reviews.length === 0 ? `
+        <div class="card" style="display:flex;gap:10px;align-items:center">
+          <span>✍️</span><span style="color:#6B4F3A;font-size:13px">${esc(t('no_reviews'))}</span>
+        </div>
+      ` : reviews.slice(0,5).map(r=>`
+        <div class="review">
+          <div class="review-head">
+            <div class="review-av">${esc((r.userName||'?')[0].toUpperCase())}</div>
+            <div class="review-name">${esc(r.userName)}</div>
+            ${stars(r.rating,12)}
+          </div>
+          <div class="review-text">${esc(r.text)}</div>
+        </div>
+      `).join('')}
+
+      <button class="btn ghost full" onclick="push('writeReview',{productId:'${p.id}'})">✍️ ${esc(t('write_review'))}</button>
+    </div>
+  </div>
+  <div class="detail-actions">
+    <button class="btn ghost" onclick="addToCart('${p.id}')">🛒 ${esc(t('add_to_cart'))}</button>
+    <button class="btn" onclick="buyNow('${p.id}')">⚡ ${esc(t('buy_now'))}</button>
+  </div>`;
+}
+
+function toggleWishReload(id){ toggleWish(id); }
+function shareProduct(id){
+  const p = getProduct(id);
+  if(!p) return;
+  const txt = `${p.title} — ${rupees(p.price)}\nby ${p.sellerName}\n\n${p.description}\n\nOn Kalakriti`;
+  navigator.clipboard?.writeText(txt).then(()=>toast('Copied!','#3F6E52'));
+}
+function buyNow(id){ addToCart(id); push('checkout'); }
+
+/* ═══════════════ WRITE REVIEW ═══════════════ */
+let reviewRating = 5;
+function viewWriteReview(params){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('write_review'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:20px">
+    <label style="font-size:15px;font-weight:700;color:#7A2331">${esc(t('rating'))}</label>
+    <div style="display:flex;justify-content:center;gap:8px;margin:14px 0">
+      ${[1,2,3,4,5].map(i=>`
+        <button style="font-size:40px;background:none;color:${i<=reviewRating?'#D9A441':'#ccc'}"
+          onclick="reviewRating=${i};setInner()">★</button>
+      `).join('')}
+    </div>
+    <label style="font-size:15px;font-weight:700;color:#7A2331">${esc(t('your_review'))}</label>
+    <textarea id="reviewText" rows="5" placeholder="Share your experience…"
+      style="width:100%;margin-top:8px;padding:14px;border-radius:14px;border:1px solid rgba(217,164,65,.5);background:#FFF9EC;font-size:14px;resize:vertical"></textarea>
+    <button class="btn full" style="margin-top:20px" onclick="submitReview('${params.productId}')">📤 ${esc(t('submit_review'))}</button>
+  </div>`;
+}
+function submitReview(productId){
+  const text = (document.getElementById('reviewText').value||'').trim();
+  if(!text){ toast('Please write a review'); return; }
+  const p = getProduct(productId);
+  const list = state.reviews[productId] || [];
+  list.unshift({
+    id: uid(),
+    userName: state.user?.displayName || 'You',
+    rating: reviewRating,
+    text,
+    createdAt: Date.now(),
+  });
+  state.reviews[productId] = list;
+  if(p){
+    const total = p.rating * p.ratingCount + reviewRating;
+    p.ratingCount += 1;
+    p.rating = total / p.ratingCount;
+  }
+  reviewRating = 5;
+  toast(t('review_added'), '#3F6E52');
+  pop();
+}
+
+/* ═══════════════ SELLER PROFILE ═══════════════ */
+function viewSeller(params){
+  const items = state.products.filter(p=>p.sellerId===params.sellerId);
+  const avg = items.length ? items.reduce((a,b)=>a+b.rating,0)/items.length : 0;
+  const city = items[0]?.location || '';
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(params.sellerName.split(',')[0])}</div>
+  </div>
+  <div class="screen doodle">
+    <div class="profile-hero">
+      <div class="profile-avatar">${esc((params.sellerName||'?')[0].toUpperCase())}</div>
+      <div class="profile-name">${esc(params.sellerName)}</div>
+      ${city?`<div style="font-size:12px;opacity:.9">📍 ${esc(city)}</div>`:''}
+      <div style="font-size:12px;opacity:.9">⭐ ${avg.toFixed(1)} · ${items.length} listing${items.length!==1?'s':''}</div>
+    </div>
+    <div class="section-title">Their Crafts</div>
+    <div class="grid">
+      ${items.map(p=>productCard(p)).join('')}
+    </div>
+  </div>`;
+}
+
+/* ═══════════════ CART ═══════════════ */
+function viewCart(){
+  const ids = Object.keys(state.cart).filter(id=>getProduct(id));
+  if(!ids.length){
+    return `<div class="empty"><div class="empty-circle">🛒</div>
+      <h3>${esc(t('empty_cart'))}</h3></div>`;
+  }
+  const sub = cartTotal();
+  const fee = cartDeliveryFee();
+  const days = cartDeliveryDays();
+  return `
+  <div style="padding:12px 0 0">
+    ${ids.map(id=>{
+      const p = getProduct(id);
+      const q = state.cart[id];
+      return `
+      <div class="cart-item">
+        <div class="cart-thumb" style="${productGradient(p)}">${catEmoji(p.category)}</div>
+        <div class="cart-info">
+          <h4>${esc(p.title)}</h4>
+          <div class="price">${rupees(p.price)} each</div>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="decCart('${p.id}')">−</button>
+            <b style="color:#7A2331;font-size:15px">${q}</b>
+            <button class="qty-btn" onclick="addToCart('${p.id}')">+</button>
+          </div>
+        </div>
+        <div class="cart-line-total">${rupees(p.price*q)}</div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="height:20px"></div>
+  <div class="checkout-total">
+    <div class="sum-row"><span>${esc(t('subtotal'))}</span><span>${rupees(sub)}</span></div>
+    ${hasLocation()?`<div class="sum-row green"><span>🚚 ${esc(t('delivery_fee'))}</span><span>${fee===0?esc(t('free_delivery')):rupees(fee)}</span></div>
+    <div class="sum-row"><span>⏱ ETA</span><span>${days} day${days!==1?'s':''}</span></div>`:''}
+    <div class="sum-row big"><span>${esc(t('grand_total'))}</span><span>${rupees(sub+fee)}</span></div>
+    <button class="btn full" style="margin-top:14px;padding:14px" onclick="push('checkout')">✅ ${esc(t('checkout'))}</button>
+  </div>`;
+}
+function decCart(id){
+  if(!state.cart[id]) return;
+  state.cart[id]--;
+  if(state.cart[id] <= 0) delete state.cart[id];
+  setInner();
+}
+
+/* ═══════════════ CHECKOUT ═══════════════ */
+let checkoutPayment = 'cod';
+let checkoutCoupon = null;
+let checkoutCouponInput = '';
+
+function viewCheckout(){
+  const addr = state.addresses.find(a=>a.isDefault) || state.addresses[0];
+  const sub = cartTotal();
+  let discount = 0;
+  if(checkoutCoupon && sub >= checkoutCoupon.minCart){
+    discount = Math.min(sub * checkoutCoupon.percent / 100, checkoutCoupon.maxDiscount);
+  }
+  const delivery = hasLocation() ? cartDeliveryFee() : (sub>500?0:40);
+  const days = hasLocation() ? cartDeliveryDays() : 4;
+  const grand = sub - discount + delivery;
+
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('checkout'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:16px">
+    <div class="section-title" style="margin-left:0">📍 ${esc(t('addresses'))}</div>
+    ${!addr ? `
+      <div class="card" style="display:flex;gap:10px;align-items:center">
+        <span>📍</span>
+        <span style="flex:1;color:#6B4F3A;font-size:13px">No address yet</span>
+        <button class="btn ghost" style="padding:8px 12px;font-size:12px" onclick="push('editAddress')">${esc(t('add_address'))}</button>
+      </div>
+    ` : `
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:8px">
+          <b style="flex:1">${esc(addr.fullName)}</b>
+          ${addr.isDefault?`<span style="background:#D9A441;color:#7A2331;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px">${esc(t('default_address'))}</span>`:''}
+        </div>
+        <div style="font-size:13px;color:#6B4F3A;margin-top:6px">${esc(addr.line)}, ${esc(addr.city)}, ${esc(addr.state)} - ${esc(addr.pincode)}</div>
+        <div style="font-size:13px;color:#6B4F3A">📞 ${esc(addr.phone)}</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="push('addressBook')">Change</button>
+          <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="push('editAddress',{id:'${addr.id}'})">Edit</button>
+        </div>
+      </div>
+    `}
+
+    <div class="section-title" style="margin-left:0">🚚 ${esc(t('delivery_eta'))}</div>
+    <div class="delivery-box">
+      <div class="row">⏱ <b>Estimated arrival: ${days} day${days!==1?'s':''}</b></div>
+    </div>
+
+    <div class="section-title" style="margin-left:0">💳 ${esc(t('payment_method'))}</div>
+    ${[
+      ['cod',t('cod'),'💵'],
+      ['upi',t('upi'),'📱'],
+      ['card',t('card'),'💳'],
+      ['netbanking',t('netbanking'),'🏦'],
+    ].map(([k,l,e])=>`
+      <div class="card" style="display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;
+        ${checkoutPayment===k?'border-color:#7A2331;background:rgba(122,35,49,.05)':''}"
+        onclick="checkoutPayment='${k}';setInner()">
+        <span style="font-size:22px">${e}</span>
+        <span style="flex:1;font-weight:600;font-size:14px">${esc(l)}</span>
+        <span>${checkoutPayment===k?'🔘':'⚪'}</span>
+      </div>
+    `).join('')}
+
+    <div class="section-title" style="margin-left:0">🎟️ ${esc(t('coupons'))}</div>
+    <div style="display:flex;gap:8px">
+      <input id="couponInput" placeholder="WELCOME10" value="${esc(checkoutCouponInput)}"
+        oninput="checkoutCouponInput=this.value"
+        style="flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(217,164,65,.5);background:#FFF9EC;font-size:14px;text-transform:uppercase">
+      <button class="btn" onclick="applyCoupon()">${esc(t('apply_coupon'))}</button>
+    </div>
+    ${checkoutCoupon?`
+      <div class="card" style="margin-top:10px;background:rgba(63,110,82,.12);border-color:#3F6E52;display:flex;gap:8px;align-items:center">
+        <span>✅</span>
+        <span style="flex:1;font-size:12px;color:#3F6E52">${esc(checkoutCoupon.description)}</span>
+        <button onclick="checkoutCoupon=null;setInner()" style="font-size:16px">✕</button>
+      </div>
+    `:''}
+
+    <div class="section-title" style="margin-left:0">📦 Order Summary</div>
+    <div class="card">
+      <div class="sum-row"><span>${esc(t('subtotal'))}</span><span>${rupees(sub)}</span></div>
+      ${discount>0?`<div class="sum-row green"><span>${esc(t('discount'))}</span><span>− ${rupees(discount)}</span></div>`:''}
+      <div class="sum-row ${delivery===0?'green':''}"><span>${esc(t('delivery_fee'))}</span><span>${delivery===0?esc(t('free_delivery')):rupees(delivery)}</span></div>
+      <div class="sum-row big"><span>${esc(t('grand_total'))}</span><span>${rupees(grand)}</span></div>
+    </div>
+
+    <button class="btn full" style="margin-top:20px;padding:16px;font-size:16px" onclick="placeOrder()">✅ ${esc(t('place_order'))}</button>
+    <div style="height:30px"></div>
+  </div>`;
+}
+
+function applyCoupon(){
+  const code = (checkoutCouponInput||'').trim().toUpperCase();
+  const c = COUPONS.find(x=>x.code===code);
+  if(!c || cartTotal() < c.minCart){
+    checkoutCoupon = null;
+    toast(t('invalid_coupon'));
+  } else {
+    checkoutCoupon = c;
+    toast(t('coupon_applied'), '#3F6E52');
+  }
+  setInner();
+}
+
+function placeOrder(){
+  if(!state.addresses.length){
+    toast('Please add a delivery address');
+    return;
+  }
+  const addr = state.addresses.find(a=>a.isDefault) || state.addresses[0];
+  const sub = cartTotal();
+  let discount = 0;
+  if(checkoutCoupon && sub >= checkoutCoupon.minCart){
+    discount = Math.min(sub * checkoutCoupon.percent / 100, checkoutCoupon.maxDiscount);
+  }
+  const delivery = hasLocation() ? cartDeliveryFee() : (sub>500?0:40);
+  const days = hasLocation() ? cartDeliveryDays() : 4;
+  const grand = sub - discount + delivery;
+  const count = cartCount();
+  const oid = uid().slice(-8).toUpperCase();
+
+  state.orders.unshift({
+    id: oid, total: grand, itemCount: count, status: 'confirmed',
+    placedAt: Date.now(), deliveryDays: days, coupon: checkoutCoupon?.code,
+    deliveryFee: delivery, deliveryAddress: `${addr.line}, ${addr.city}`,
+  });
+  addNotif('Order placed', `Order #${oid} confirmed. Total ${rupees(grand)}`);
+
+  state.cart = {};
+  checkoutCoupon = null;
+  checkoutCouponInput = '';
+  state.coins += 25;
+  save();
+
+  // replace checkout with success
+  state.stack = [{screen:'orderSuccess', params:{oid, total:grand, count}}];
+  render();
+}
+
+/* ═══════════════ ORDER SUCCESS ═══════════════ */
+function viewOrderSuccess(params){
+  return `
+  <div class="appbar"><div class="title">Kalakriti</div></div>
+  <div class="screen doodle" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;gap:14px">
+    <div style="width:140px;height:140px;border-radius:50%;background:rgba(63,110,82,.15);border:3px solid #3F6E52;display:flex;align-items:center;justify-content:center;font-size:72px;color:#3F6E52">✅</div>
+    <h2 style="font-size:26px;font-weight:700;color:#7A2331;margin-top:14px">${esc(t('order_confirmed'))}</h2>
+    <div style="font-size:15px;color:#6B4F3A;letter-spacing:1.5px">${esc(t('order_id'))} #${esc(params.oid)}</div>
+    <div style="font-size:18px;font-weight:700;color:#7A2331">${params.count} item${params.count!==1?'s':''} · ${rupees(params.total)}</div>
+    <div style="padding:8px 14px;border-radius:10px;background:rgba(63,110,82,.1);border:1px solid rgba(63,110,82,.5);display:flex;gap:6px;align-items:center;color:#3F6E52;font-size:13px;font-weight:700">
+      🚚 Estimated delivery in ${state.orders[0]?.deliveryDays || 4} days
+    </div>
+    <button class="btn full" style="margin-top:20px;padding:14px" onclick="trackOrder('${esc(params.oid)}')">🚚 ${esc(t('track_order'))}</button>
+    <button class="btn ghost full" style="padding:14px" onclick="state.stack=[];setTab('shop');render()">${esc(t('tab_shop'))}</button>
+  </div>`;
+}
+function trackOrder(oid){ state.stack = [{screen:'tracking', params:{oid}}]; render(); }
+
+/* ═══════════════ ORDER TRACKING ═══════════════ */
+function viewTracking(params){
+  const order = state.orders.find(o=>o.id===params.oid);
+  const days = order?.deliveryDays || 4;
+  const steps = [
+    ['confirmed','✅',t('confirmed')],
+    ['packed','📦',t('packed')],
+    ['shipped','🚚',t('shipped')],
+    ['out_for_delivery','🛵',t('out_for_delivery')],
+    ['delivered','🏠',t('delivered')],
+  ];
+  const current = 2;
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('order_tracking'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:20px">
+    <div class="card">
+      <div style="font-size:15px;font-weight:700;color:#7A2331">${esc(t('order_id'))}: #${esc(params.oid)}</div>
+      <div style="display:flex;gap:6px;align-items:center;color:#6B4F3A;font-size:13px;margin-top:6px">
+        ⏱ Expected delivery in ${days} days
+      </div>
+    </div>
+    <div style="margin-top:24px">
+      ${steps.map((s,i)=>{
+        const done = i <= current;
+        return `
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="width:42px;height:42px;border-radius:50%;
+              background:${done?'#3F6E52':'#FFF9EC'};
+              border:2px solid ${done?'#3F6E52':'#D9A441'};
+              display:flex;align-items:center;justify-content:center;font-size:18px">
+              ${s[1]}
+            </div>
+            ${i<steps.length-1?`<div style="width:2px;height:46px;background:${done?'#3F6E52':'rgba(217,164,65,.4)'}"></div>`:''}
+          </div>
+          <div style="padding-top:10px">
+            <div style="font-size:15px;font-weight:${done?'700':'400'};color:${done?'#7A2331':'#6B4F3A'}">${esc(s[2])}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+/* ═══════════════ UPLOAD SCREEN ═══════════════ */
+let uploadImages = [];
+let uploadCategory = 'Sarees';
+let uploadVoiceLang = 'te-IN';
+let uploadProductLat = 0, uploadProductLng = 0, uploadProductLocation = '';
+let uploadBusy = false;
+let uploadShowTrans = false;
+
+function viewUpload(){
+  return `
+  <div class="upload">
+    <h2 style="font-size:22px;font-weight:700;color:#7A2331;display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <span style="width:4px;height:24px;background:#D9A441;border-radius:2px"></span>
+      ${esc(t('list_new_craft'))}
+    </h2>
+
+    <div class="voice-card" onclick="startVoiceListing()">
+      <div class="mic">🎤</div>
+      <div class="info">
+        <h4>🎤 ${esc(t('voice_listing'))}</h4>
+        <p>తెలుగు / हिन्दी / English → English listing</p>
+      </div>
+      <span style="opacity:.9">→</span>
+    </div>
+
+    <div class="loc-card ${(uploadProductLat||hasLocation())?'set':'unset'}" onclick="pickProductLocation()">
+      <div class="ic">${(uploadProductLat||hasLocation())?'📍':'📌'}</div>
+      <div class="info">
+        <h4>${uploadProductLocation || state.userCity || 'Set shipping location'}</h4>
+        <p>${(uploadProductLat||hasLocation())?'Buyers see exact distance & delivery ETA':'Required — tap to pin your shop on map'}</p>
+      </div>
+      <span style="color:#7A2331;font-size:12px;font-weight:700">${(uploadProductLat||hasLocation())?'Change':'Set'}</span>
+    </div>
+
+    <div class="field">
+      <label>${esc(t('category'))}</label>
+      <select id="upCategory" onchange="uploadCategory=this.value">
+        ${['Sarees','Dresses','Handicrafts','Jewelry'].map(c=>`
+          <option value="${c}" ${uploadCategory===c?'selected':''}>${catEmoji(c)} ${c}</option>
+        `).join('')}
+      </select>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <b style="color:#7A2331;font-size:14px">${esc(t('photos'))} (${uploadImages.length})</b>
+      ${uploadImages.length>0?`<button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="pickImages()">+ ${esc(t('add_more'))}</button>`:''}
+    </div>
+
+    ${uploadImages.length===0?`
+      <div class="photo-drop" onclick="pickImages()">
+        <div class="ic">📷</div>
+        <div>Tap to add photo</div>
+      </div>
+    `:`
+      <div class="photo-strip">
+        ${uploadImages.map((img,i)=>`
+          <div class="photo-thumb">
+            <img src="${img}">
+            <button class="x" onclick="uploadImages.splice(${i},1);setInner()">✕</button>
+          </div>
+        `).join('')}
+      </div>
+    `}
+
+    ${uploadImages.length>0 && !uploadBusy?`
+      <button class="btn gold full" style="padding:14px;margin-bottom:8px" onclick="analyzeWithAI()">
+        ✨ AI Auto-Fill Everything
+      </button>
+    `:''}
+
+    ${uploadBusy?`
+      <div class="center-spin" style="padding:14px;background:rgba(0,0,0,.03);border-radius:14px;margin-bottom:14px">
+        <div class="spin"></div>
+        <div>${esc(t('analyzing'))}</div>
+      </div>
+    `:''}
+
+    <div class="field">
+      <label>${esc(t('title'))}</label>
+      <input id="upTitle" placeholder="${esc(t('title_hint'))}">
+    </div>
+
+    <div class="field">
+      <label>${esc(t('voice_lang'))}</label>
+      <select id="upVoiceLang" onchange="uploadVoiceLang=this.value">
+        <option value="te-IN" ${uploadVoiceLang==='te-IN'?'selected':''}>తెలుగు (Telugu)</option>
+        <option value="hi-IN" ${uploadVoiceLang==='hi-IN'?'selected':''}>हिन्दी (Hindi)</option>
+        <option value="en-US" ${uploadVoiceLang==='en-US'?'selected':''}>English</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>${esc(t('description'))} (English)</label>
+      <textarea id="upDesc" rows="3" placeholder="${esc(t('desc_hint'))}"></textarea>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="dictate()">🎤 Dictate</button>
+        <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="speakDesc()">🔊 Speak</button>
+      </div>
+    </div>
+
+    ${uploadShowTrans?`
+      <div class="field">
+        <label>विवरण (हिन्दी)</label>
+        <textarea id="upDescHi" rows="2"></textarea>
+      </div>
+    `:''}
+
+    <div class="field">
+      <label>${esc(t('location'))}</label>
+      <input id="upLocation" placeholder="${esc(t('location'))}" value="${esc(uploadProductLocation || state.userCity)}"
+        oninput="uploadProductLocation=this.value">
+    </div>
+
+    <div class="field">
+      <label>${esc(t('delivery'))}</label>
+      <textarea id="upDelivery" rows="2" placeholder="e.g. Ships in 3-5 days"></textarea>
+    </div>
+
+    <div class="field">
+      <label>${esc(t('price'))}</label>
+      <input id="upPrice" type="number" placeholder="${esc(t('price_hint'))}">
+    </div>
+
+    <button class="btn full" style="padding:16px;font-size:15px;margin-top:12px" onclick="publishListing()">
+      ☁️ ${esc(t('save_listing'))}
+    </button>
+  </div>`;
+}
+
+function pickImages(){
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.multiple = true;
+  input.onchange = async ()=>{
+    for(const f of input.files){
+      const dataUrl = await fileToDataUrl(f);
+      uploadImages.push(dataUrl);
+    }
+    setInner();
+  };
+  input.click();
+}
+
+function fileToDataUrl(file){
+  return new Promise(res=>{
+    const r = new FileReader();
+    r.onload = ()=>res(r.result);
+    r.readAsDataURL(file);
+  });
+}
+
+async function analyzeWithAI(){
+  if(!uploadImages.length) return;
+  uploadBusy = true; setInner();
+  const desc = document.getElementById('upDesc')?.value || '';
+  let result = await aiAnalyze(uploadImages[0], desc);
+  if(!result){
+    // local fallback
+    const base = uploadCategory==='Sarees'?2500:uploadCategory==='Dresses'?1400:uploadCategory==='Jewelry'?900:800;
+    result = {
+      title: desc.slice(0,50) || `Handcrafted ${uploadCategory}`,
+      description_en: (desc || `Handcrafted ${uploadCategory.toLowerCase()} made with traditional techniques.`) + ' Beautifully handcrafted by Indian artisans.',
+      description_hi: 'भारतीय शिल्पकारों द्वारा हस्तनिर्मित।',
+      category: uploadCategory,
+      price_low: base,
+      price_high: Math.round(base*1.6),
+    };
+  }
+  uploadBusy = false;
+  const titleEl = document.getElementById('upTitle');
+  const descEl = document.getElementById('upDesc');
+  const priceEl = document.getElementById('upPrice');
+  if(titleEl) titleEl.value = result.title || '';
+  if(descEl) descEl.value = result.description_en || descEl.value;
+  if(priceEl && result.price_low && result.price_high){
+    priceEl.value = Math.round((result.price_low + result.price_high)/2);
+  }
+  uploadShowTrans = true;
+  setInner();
+  // restore values
+  const t2 = document.getElementById('upTitle'); if(t2) t2.value = result.title || '';
+  const d2 = document.getElementById('upDesc'); if(d2) d2.value = result.description_en || '';
+  const p2 = document.getElementById('upPrice'); if(p2 && result.price_low) p2.value = Math.round((result.price_low+result.price_high)/2);
+  const h2 = document.getElementById('upDescHi'); if(h2) h2.value = result.description_hi || '';
+  toast(t('ai_filled'), '#3F6E52');
+}
+
+/* ─── Voice listing ─── */
+function startVoiceListing(){
+  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){
+    toast(t('mic_unavailable')); return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new SR();
+  rec.lang = uploadVoiceLang;
+  rec.continuous = false;
+  rec.interimResults = false;
+  let heard = '';
+
+  // show modal
+  const modal = document.createElement('div');
+  modal.className = 'modal-bg';
+  modal.innerHTML = `
+    <div class="modal" style="text-align:center">
+      <h3>🎤 ${esc(t('voice_listing'))}</h3>
+      <div class="spin" style="margin:20px auto"></div>
+      <div id="heardText" style="font-size:14px;min-height:40px;color:#3B2418">${esc(t('speak_now'))}</div>
+      <div style="font-size:11px;color:#6B4F3A;margin-top:8px">Language: ${uploadVoiceLang.split('-')[0].toUpperCase()}</div>
+      <div class="modal-actions">
+        <button class="btn ghost" onclick="this.closest('.modal-bg').remove();window._stopSR=true">${esc(t('cancel'))}</button>
+        <button class="btn" id="voiceDone">Done</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+
+  rec.onresult = (e)=>{
+    heard = e.results[0][0].transcript;
+    const el = document.getElementById('heardText');
+    if(el) el.textContent = heard;
+  };
+  rec.onerror = (e)=>{
+    console.warn('SR error', e);
+  };
+  rec.start();
+
+  document.getElementById('voiceDone').onclick = async ()=>{
+    rec.stop();
+    modal.remove();
+    if(!heard.trim()){ toast('No speech detected'); return; }
+    uploadBusy = true; setInner();
+    const result = await aiVoiceListing(heard, uploadVoiceLang);
+    uploadBusy = false;
+    if(!result){ toast('AI failed. Try again.'); return; }
+    setInner();
+    const t2 = document.getElementById('upTitle'); if(t2) t2.value = result.title || '';
+    const d2 = document.getElementById('upDesc'); if(d2) d2.value = result.description_en || '';
+    const h2 = document.getElementById('upDescHi'); if(h2) h2.value = result.description_native || '';
+    const p2 = document.getElementById('upPrice');
+    if(p2 && result.price_low && result.price_high){
+      p2.value = Math.round((result.price_low + result.price_high)/2);
+    }
+    if(result.category && CATEGORIES.includes(result.category)) uploadCategory = result.category;
+    uploadShowTrans = true;
+    setInner();
+    // restore
+    const t3 = document.getElementById('upTitle'); if(t3) t3.value = result.title || '';
+    const d3 = document.getElementById('upDesc'); if(d3) d3.value = result.description_en || '';
+    const h3 = document.getElementById('upDescHi'); if(h3) h3.value = result.description_native || '';
+    const p3 = document.getElementById('upPrice'); if(p3 && result.price_low) p3.value = Math.round((result.price_low+result.price_high)/2);
+    toast(t('ai_filled'), '#3F6E52');
+  };
+}
+
+let dictRec = null;
+function dictate(){
+  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){
+    toast(t('mic_unavailable')); return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new SR();
+  rec.lang = uploadVoiceLang;
+  rec.continuous = false;
+  rec.onresult = (e)=>{
+    const txt = e.results[0][0].transcript;
+    const el = document.getElementById('upDesc');
+    if(el) el.value = (el.value + ' ' + txt).trim();
+  };
+  rec.start();
+  toast('Listening…');
+}
+
+function speakDesc(){
+  const text = document.getElementById('upDesc')?.value;
+  if(!text) return;
+  if('speechSynthesis' in window){
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = uploadVoiceLang;
+    speechSynthesis.speak(u);
+  } else toast('Voice not available');
+}
+
+async function pickProductLocation(){
+  const loc = await getBrowserLocation();
+  if(loc){
+    uploadProductLat = loc.lat; uploadProductLng = loc.lng;
+    uploadProductLocation = nearestCity(loc.lat, loc.lng);
+    if(!hasLocation()){
+      state.userLat = loc.lat; state.userLng = loc.lng;
+      state.userCity = uploadProductLocation;
+    }
+    setInner();
+    toast(t('location_set'), '#3F6E52');
+  } else {
+    toast('Location permission denied');
+  }
+}
+
+function publishListing(){
+  const title = (document.getElementById('upTitle')?.value||'').trim();
+  const desc = (document.getElementById('upDesc')?.value||'').trim();
+  const descHi = (document.getElementById('upDescHi')?.value||'').trim();
+  const price = parseFloat(document.getElementById('upPrice')?.value||'0');
+  const loc = (document.getElementById('upLocation')?.value||'').trim();
+  const del = (document.getElementById('upDelivery')?.value||'').trim();
+
+  if(!title || !price || !uploadImages.length){ toast(t('fill_required')); return; }
+
+  const lat = uploadProductLat || state.userLat;
+  const lng = uploadProductLng || state.userLng;
+  const location = uploadProductLocation || loc || state.userCity;
+
+  const p = {
+    id: uid(),
+    title, description: desc, descriptionHi: descHi,
+    category: uploadCategory, price,
+    sellerId: state.user?.uid || 'anon',
+    sellerName: state.user?.displayName || 'You',
+    location, deliveryInfo: del,
+    images: uploadImages.slice(),
+    rating: 0, ratingCount: 0, views: 0,
+    createdAt: Date.now(),
+    keywords: extractKeywords(title + ' ' + desc),
+    lat, lng,
+  };
+  state.products.unshift(p);
+  addNotif('Listing published', `"${title}" is now live.`);
+  toast(t('uploaded'), '#3F6E52');
+
+  // reset
+  uploadImages = [];
+  uploadShowTrans = false;
+  uploadProductLat = 0; uploadProductLng = 0; uploadProductLocation = '';
+  setTab('shop');
+}
+
+function extractKeywords(text){
+  const stop = new Set(['the','a','an','and','or','in','on','at','to','for','of','with','by','is','are','this','that']);
+  const freq = {};
+  text.toLowerCase().split(/\W+/).forEach(w=>{
+    if(w.length>2 && !stop.has(w)) freq[w] = (freq[w]||0)+1;
+  });
+  return Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
+}
+
+/* ═══════════════ WALLET ═══════════════ */
+function viewWallet(){
+  const earns = [
+    ['🛍️','First order','+100 coins',100],
+    ['⭐','Rate a product','+10 coins',10],
+    ['📤','Share a listing','+20 coins',20],
+    ['👥','Invite a friend','+150 coins',150],
+    ['🎤','Try voice listing','+50 coins',50],
+  ];
+  return `
+  <div class="wallet-hero">
+    <div class="label">Kalakriti Coins 🪙</div>
+    <div class="coins"><span>🪙</span>${state.coins}</div>
+    <div class="sub">1 coin = ₹1 off on any order</div>
+  </div>
+
+  <div class="card" style="margin:0 16px 16px;display:flex;gap:14px;align-items:center">
+    <div style="font-size:26px;color:#7A2331">💼</div>
+    <div style="flex:1">
+      <div style="font-size:12px;color:#6B4F3A">Seller Balance</div>
+      <div style="font-size:20px;font-weight:700;color:#7A2331">₹${(state.orders.reduce((a,o)=>a+o.total,0)*0.85).toFixed(0)}</div>
+    </div>
+    <button class="btn ghost" style="padding:8px 14px;font-size:12px" onclick="toast('Withdrawal requested!','#3F6E52')">Withdraw</button>
+  </div>
+
+  <div class="section-title">Earn Coins</div>
+  ${earns.map(([e,title,r,amt])=>`
+    <div class="earn-tile">
+      <div class="ic">${e}</div>
+      <div class="info">
+        <h4>${title}</h4>
+        <div class="r">${r}</div>
+      </div>
+      <button class="btn" style="padding:8px 14px;font-size:12px" onclick="earnCoins(${amt})">+</button>
+    </div>
+  `).join('')}
+  <div style="height:90px"></div>`;
+}
+function earnCoins(n){
+  state.coins += n;
+  toast(`+${n} coins earned!`, '#3F6E52');
+  setInner();
+}
+
+/* ═══════════════ PROFILE ═══════════════ */
+function viewProfile(){
+  const u = state.user || {};
+  const myProducts = state.products.filter(p=>p.sellerId===u.uid);
+  const menus = [
+    ['🏪', t('my_shop'), `push('myShop')`],
+    ['💼', 'Wallet & Coins', `setTab('wallet')`],
+    ['🎁', t('refer'), `push('referral')`],
+    ['❤️', t('wishlist'), `push('wishlist')`],
+    ['🧾', t('orders'), `push('orders')`],
+    ['📍', t('addresses'), `push('addressBook')`],
+    ['🔔', t('notifications'), `push('notifications')`],
+    ['⚙️', t('notification_prefs'), `push('notifPrefs')`],
+    ['🎟️', t('coupons'), `push('coupons')`],
+    ['🔒', t('privacy'), `push('privacy')`],
+    ['💬', t('feedback'), `push('feedback')`],
+    ['❓', t('help'), `push('help')`],
+    ['ℹ️', t('about'), `push('about')`],
+    ['⚙️', t('settings'), `push('settings')`],
+  ];
+  return `
+  <div class="profile-hero">
+    <div class="profile-avatar">${esc((u.displayName||'A')[0].toUpperCase())}</div>
+    <div class="profile-name">${esc(u.displayName || 'Artisan')}</div>
+    <div class="profile-email">${esc(u.email||'')}</div>
+    ${hasLocation()?`<div style="font-size:12px;opacity:.9">📍 ${esc(state.userCity)}</div>`:''}
+    <div class="profile-badges">
+      <span class="p-badge">✅ ${esc(t('verified'))}</span>
+      <span class="p-badge">⚡ Fast Replier</span>
+    </div>
+    ${u.bio?`<div style="font-size:13px;opacity:.9;text-align:center;margin-top:6px">${esc(u.bio)}</div>`:''}
+  </div>
+
+  <div class="qa-row">
+    <button class="qa-btn" onclick="push('myShop')">
+      <span class="ic">🏪</span><span>${esc(t('my_shop'))}</span>
+    </button>
+    <button class="qa-btn" onclick="push('orders')">
+      <span class="ic">🧾</span><span>${esc(t('orders'))}</span>
+    </button>
+    <button class="qa-btn" onclick="push('wishlist')">
+      <span class="ic">❤️</span><span>${esc(t('wishlist'))}</span>
+    </button>
+  </div>
+
+  <div style="height:14px"></div>
+
+  <div class="menu-list">
+    ${menus.map(([ic,l,act])=>`
+      <div class="menu-tile" onclick="${act}">
+        <span class="ic">${ic}</span>
+        <span>${esc(l)}</span>
+        <span class="chev">›</span>
+      </div>
+    `).join('')}
+    <div class="menu-tile danger" onclick="signOut()">
+      <span class="ic">🚪</span>
+      <span>${esc(t('logout'))}</span>
+      <span class="chev">›</span>
+    </div>
+  </div>`;
+}
+
+function signOut(){
+  if(confirm(t('logout') + '?')){
+    state.user = null;
+    state.screen = 'login';
+    save();
+    render();
+  }
+}
+
+/* ═══════════════ MY SHOP ═══════════════ */
+function viewMyShop(){
+  const mine = state.products.filter(p=>p.sellerId===state.user?.uid);
+  const views = mine.reduce((a,p)=>a+p.views,0);
+  const avg = mine.length ? mine.reduce((a,p)=>a+p.rating,0)/mine.length : 0;
+  if(!mine.length){
+    return `
+    <div class="appbar">
+      <button class="icon-btn" onclick="pop()">←</button>
+      <div class="title">${esc(t('my_shop'))}</div>
+    </div>
+    <div class="screen doodle">
+      <div class="empty">
+        <div class="empty-circle">🏪</div>
+        <p>${esc(t('no_products'))}</p>
+        <button class="btn" onclick="pop();setTab('upload')">+ List your first craft</button>
+      </div>
+    </div>`;
+  }
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('my_shop'))}</div>
+  </div>
+  <div class="screen doodle">
+    <div class="profile-hero" style="padding:16px">
+      <div style="display:flex;gap:14px;width:100%">
+        <div style="flex:1;text-align:center">
+          <div style="font-size:22px;font-weight:700">${mine.length}</div>
+          <div style="font-size:11px;opacity:.85">Listings</div>
+        </div>
+        <div style="flex:1;text-align:center">
+          <div style="font-size:22px;font-weight:700">${views}</div>
+          <div style="font-size:11px;opacity:.85">Views</div>
+        </div>
+        <div style="flex:1;text-align:center">
+          <div style="font-size:22px;font-weight:700">${avg.toFixed(1)}</div>
+          <div style="font-size:11px;opacity:.85">Rating</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">Your Listings</div>
+    <div class="grid">
+      ${mine.map(p=>`
+        <div style="position:relative">
+          ${productCard(p)}
+          <button onclick="event.stopPropagation();deleteListing('${p.id}')"
+            style="position:absolute;top:8px;left:8px;background:rgba(255,255,255,.95);border-radius:50%;width:30px;height:30px;font-size:14px">🗑</button>
+        </div>
+      `).join('')}
+    </div>
+    <div style="height:30px"></div>
+  </div>`;
+}
+function deleteListing(id){
+  if(!confirm(t('delete_confirm'))) return;
+  state.products = state.products.filter(p=>p.id!==id);
+  toast(t('deleted'), '#3F6E52');
+  setInner();
+}
+
+/* ═══════════════ WISHLIST ═══════════════ */
+function viewWishlist(){
+  const list = state.products.filter(p=>state.wishlist.includes(p.id));
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('wishlist'))}</div>
+  </div>
+  <div class="screen doodle">
+    ${list.length===0?`
+      <div class="empty"><div class="empty-circle">❤️</div>
+        <p>${esc(t('no_wishlist'))}</p></div>
+    `:`
+      <div class="grid">${list.map(p=>productCard(p)).join('')}</div>
+    `}
+  </div>`;
+}
+
+/* ═══════════════ ORDERS ═══════════════ */
+function viewOrders(){
+  const list = state.orders;
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('orders'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:12px 0">
+    ${list.length===0?`
+      <div class="empty"><div class="empty-circle">🧾</div>
+        <p>${esc(t('no_orders'))}</p></div>
+    `:list.map(o=>{
+      const d = new Date(o.placedAt);
+      return `
+      <div class="card" style="margin:0 12px 10px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span>🧾</span>
+          <b style="flex:1;font-size:14px">Order #${esc(o.id)}</b>
+          <span style="background:#3F6E52;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700">
+            ${esc(t(o.status||'confirmed'))}
+          </span>
+        </div>
+        <div style="font-size:13px;color:#6B4F3A;margin-top:6px">
+          ${o.itemCount} item${o.itemCount!==1?'s':''} · ${rupees(o.total)}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#6B4F3A;margin-top:4px">
+          <span>${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}</span>
+          <span>🚚 ${o.deliveryDays||4} days</span>
+        </div>
+        <button class="btn ghost" style="margin-top:8px;padding:8px 12px;font-size:12px;align-self:flex-start" onclick="trackOrder('${esc(o.id)}')">🚚 ${esc(t('track_order'))}</button>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+/* ═══════════════ NOTIFICATIONS ═══════════════ */
+function viewNotifications(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('notifications'))}</div>
+    <div class="spacer"></div>
+    ${unreadNotifs()>0?`<button class="icon-btn" onclick="markAllRead()">✅</button>`:''}
+  </div>
+  <div class="screen doodle" style="padding:12px 0">
+    ${state.notifications.length===0?`
+      <div class="empty"><div class="empty-circle">🔔</div>
+        <p>${esc(t('no_notifications'))}</p></div>
+    `:state.notifications.map(n=>`
+      <div class="notif ${n.read?'':'unread'}">
+        <div class="ic">🔔</div>
+        <div style="flex:1">
+          <h4>${esc(n.title)}</h4>
+          <p>${esc(n.body)}</p>
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+}
+function markAllRead(){
+  state.notifications.forEach(n=>n.read=true);
+  setInner();
+}
+
+/* ═══════════════ ADDRESS BOOK ═══════════════ */
+function viewAddressBook(){
+  const list = state.addresses;
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('addresses'))}</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="push('editAddress')">+</button>
+  </div>
+  <div class="screen doodle" style="padding:12px">
+    ${list.length===0?`
+      <div class="empty"><div class="empty-circle">📍</div>
+        <p>Add your first address</p>
+        <button class="btn" onclick="push('editAddress')">+ ${esc(t('add_address'))}</button>
+      </div>
+    `:list.map(a=>`
+      <div class="card" style="margin-bottom:10px;${a.isDefault?'border-color:#7A2331;border-width:1.5px':''}">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span>📍</span>
+          <b style="flex:1">${esc(a.fullName)}</b>
+          ${a.isDefault?`<span style="background:#D9A441;color:#7A2331;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px">${esc(t('default_address'))}</span>`:''}
+        </div>
+        <div style="font-size:13px;color:#6B4F3A;margin-top:6px">${esc(a.line)}, ${esc(a.city)}, ${esc(a.state)} - ${esc(a.pincode)}</div>
+        <div style="font-size:13px;color:#6B4F3A">📞 ${esc(a.phone)}</div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          ${!a.isDefault?`<button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="setDefaultAddr('${a.id}')">${esc(t('set_default'))}</button>`:''}
+          <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="push('editAddress',{id:'${a.id}'})">${esc(t('edit_address'))}</button>
+          <button class="btn ghost" style="padding:6px 12px;font-size:12px;color:#c0392b;border-color:#c0392b" onclick="removeAddr('${a.id}')">${esc(t('delete_btn'))}</button>
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+}
+function setDefaultAddr(id){
+  state.addresses.forEach(a=>a.isDefault = a.id===id);
+  setInner();
+}
+function removeAddr(id){
+  state.addresses = state.addresses.filter(a=>a.id!==id);
+  setInner();
+}
+
+/* ═══════════════ ADDRESS EDITOR ═══════════════ */
+function viewEditAddress(params){
+  const existing = params.id ? state.addresses.find(a=>a.id===params.id) : null;
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${existing?esc(t('edit_address')):esc(t('add_address'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:20px">
+    <div class="field"><label>${esc(t('full_name'))}</label>
+      <input id="addrName" value="${esc(existing?.fullName||'')}"></div>
+    <div class="field"><label>${esc(t('phone'))}</label>
+      <input id="addrPhone" type="tel" value="${esc(existing?.phone||'')}"></div>
+    <div class="field"><label>${esc(t('address_line'))}</label>
+      <textarea id="addrLine" rows="2">${esc(existing?.line||'')}</textarea></div>
+    <div style="display:flex;gap:10px">
+      <div class="field" style="flex:1"><label>${esc(t('city'))}</label>
+        <input id="addrCity" value="${esc(existing?.city||'')}"></div>
+      <div class="field" style="flex:1"><label>${esc(t('state'))}</label>
+        <input id="addrState" value="${esc(existing?.state||'')}"></div>
+    </div>
+    <div class="field"><label>${esc(t('pincode'))}</label>
+      <input id="addrPin" type="number" value="${esc(existing?.pincode||'')}"></div>
+    <label style="display:flex;align-items:center;gap:8px;margin-top:14px">
+      <input type="checkbox" id="addrDefault" ${existing?.isDefault?'checked':''}>
+      ${esc(t('set_default'))}
+    </label>
+    <button class="btn full" style="margin-top:20px;padding:16px" onclick="saveAddress('${existing?.id||''}')">
+      💾 ${esc(t('save_address'))}
+    </button>
+  </div>`;
+}
+function saveAddress(id){
+  const name = (document.getElementById('addrName').value||'').trim();
+  const phone = (document.getElementById('addrPhone').value||'').trim();
+  const line = (document.getElementById('addrLine').value||'').trim();
+  const city = (document.getElementById('addrCity').value||'').trim();
+  const st = (document.getElementById('addrState').value||'').trim();
+  const pin = (document.getElementById('addrPin').value||'').trim();
+  const isDef = document.getElementById('addrDefault').checked;
+  if(!name||!phone||!line||!city||!pin){ toast('Fill all required fields'); return; }
+  if(id){
+    state.addresses = state.addresses.filter(a=>a.id!==id);
+  }
+  if(isDef) state.addresses.forEach(a=>a.isDefault=false);
+  state.addresses.push({
+    id: id || uid(),
+    fullName: name, phone, line, city, state: st, pincode: pin,
+    isDefault: isDef || state.addresses.length===0,
+  });
+  toast(t('saved'), '#3F6E52');
+  pop();
+}
+
+/* ═══════════════ SET LOCATION ═══════════════ */
+function viewSetLocation(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('set_location'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px">
+    <div style="width:140px;height:140px;border-radius:50%;background:rgba(217,164,65,.15);display:flex;align-items:center;justify-content:center;font-size:72px">📍</div>
+    <h2 style="color:#7A2331;font-size:22px">${esc(t('set_location'))}</h2>
+    <p style="color:#6B4F3A;font-size:14px;line-height:1.5;max-width:300px">
+      Set your location once to see accurate delivery ETA and nearby products.
+    </p>
+    <button class="btn full" style="padding:16px" onclick="useMyLocation()">📍 ${esc(t('use_my_location'))}</button>
+    <button class="btn ghost full" style="padding:16px" onclick="manualLocation()">🗺️ ${esc(t('pick_on_map'))}</button>
+  </div>`;
+}
+
+async function getBrowserLocation(){
+  if(!navigator.geolocation) return null;
+  return new Promise(resolve=>{
+    navigator.geolocation.getCurrentPosition(
+      pos=>resolve({lat:pos.coords.latitude, lng:pos.coords.longitude}),
+      ()=>resolve(null),
+      {timeout:10000}
+    );
+  });
+}
+async function useMyLocation(){
+  const loc = await getBrowserLocation();
+  if(loc){
+    state.userLat = loc.lat; state.userLng = loc.lng;
+    state.userCity = nearestCity(loc.lat, loc.lng);
+    save();
+    toast(t('location_set'), '#3F6E52');
+    pop();
+  } else {
+    toast('Location permission denied');
+  }
+}
+function manualLocation(){
+  const cities = {
+    'Delhi, DL':[28.6139,77.2090],'Mumbai, MH':[19.0760,72.8777],
+    'Kolkata, WB':[22.5726,88.3639],'Chennai, TN':[13.0827,80.2707],
+    'Bengaluru, KA':[12.9716,77.5946],'Hyderabad, TS':[17.3850,78.4867],
+    'Jaipur, RJ':[26.9124,75.7873],'Varanasi, UP':[25.3176,82.9739],
+  };
+  const names = Object.keys(cities);
+  const pick = prompt('Pick your city:\n\n' + names.map((c,i)=>`${i+1}. ${c}`).join('\n'), '1');
+  const idx = parseInt(pick,10)-1;
+  if(idx>=0 && idx<names.length){
+    const [lat,lng] = cities[names[idx]];
+    state.userLat = lat; state.userLng = lng; state.userCity = names[idx];
+    save();
+    toast(t('location_set'), '#3F6E52');
+    pop();
+  }
+}
+
+/* ═══════════════ HELP / ABOUT / COUPONS ═══════════════ */
+function viewHelp(){
+  const faqs = [
+    ['How do I list a product?','Tap the Upload tab, add photos, let AI auto-fill or type manually, then publish.'],
+    ['How does delivery work?','Set your location once. Buyers see exact km distance and estimated delivery days automatically.'],
+    ['How does AI pricing work?','Our AI analyzes your image and description, then suggests a fair market range.'],
+    ['Can I speak my listing?','Yes! Tap "Voice Listing" on the Upload screen and speak in Telugu, Hindi, or English.'],
+    ['How is shipping calculated?','Distance-based: 0-100 km free, 100-500 km ₹40, 500-1200 km ₹80, 1200-2000 km ₹120, 2000+ km ₹180.'],
+  ];
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('help'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:16px">
+    ${faqs.map(([q,a])=>`
+      <div class="card" style="margin-bottom:10px">
+        <details>
+          <summary style="font-weight:700;color:#7A2331;font-size:14px;cursor:pointer;list-style:none">${esc(q)}</summary>
+          <div style="margin-top:10px;color:#6B4F3A;font-size:14px;line-height:1.5">${esc(a)}</div>
+        </details>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
+function viewAbout(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('about'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:24px;text-align:center">
+    <div style="width:120px;height:120px;border-radius:50%;margin:0 auto;background:linear-gradient(135deg,#7A2331,#5A1825);display:flex;align-items:center;justify-content:center;font-size:60px;box-shadow:0 8px 24px rgba(122,35,49,.4)">🌸</div>
+    <h1 style="font-size:32px;color:#7A2331;margin-top:20px">कलाकृति</h1>
+    <h2 style="font-size:13px;color:#7A2331;letter-spacing:6px;font-weight:600">KALAKRITI</h2>
+    <p style="font-size:14px;color:#6B4F3A;font-style:italic;margin-top:8px">${esc(t('tagline'))}</p>
+    <div class="card" style="margin-top:30px;text-align:left">
+      <p style="font-size:14px;line-height:1.7;color:#3B2418">
+        Kalakriti is a fair marketplace for Indian artisans.
+        Every seller gets equal visibility — no paid boosts, no hidden algorithms.
+        Powered by AI to help artisans describe, price and sell their craft.
+      </p>
+    </div>
+    <p style="font-size:12px;color:#6B4F3A;margin-top:24px">Version 22.0.0 (Web)</p>
+    <p style="font-size:12px;color:#6B4F3A;margin-top:6px">Made with ❤️ in India</p>
+  </div>`;
+}
+
+function viewCoupons(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('coupons'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:16px">
+    ${COUPONS.map(c=>`
+      <div class="card" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(217,164,65,.2),rgba(217,164,65,.05));border-color:#D9A441">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;border-radius:10px;background:#7A2331;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">🎟️</div>
+          <div style="flex:1">
+            <div style="font-size:20px;font-weight:700;color:#7A2331;letter-spacing:2px">${c.code}</div>
+          </div>
+          <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="copyCode('${c.code}')">Copy</button>
+        </div>
+        <p style="font-size:13px;color:#3B2418;margin-top:10px;line-height:1.4">${esc(c.description)}</p>
+      </div>
+    `).join('')}
+  </div>`;
+}
+function copyCode(code){
+  navigator.clipboard?.writeText(code).then(()=>toast(t('copied'), '#3F6E52'));
+}
+
+/* ═══════════════ SETTINGS ═══════════════ */
+function viewSettings(){
+  const langs = [
+    {code:'en', label:'English', native:'English'},
+    {code:'hi', label:'Hindi', native:'हिन्दी'},
+    {code:'te', label:'Telugu', native:'తెలుగు'},
+  ];
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('settings'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:16px">
+    <div class="lang-wrap">
+      <h4>🌐 ${esc(t('select_lang') || 'Display Language')}</h4>
+      <div class="lang-grid">
+        ${langs.map(l=>`
+          <button class="lang-btn ${state.lang===l.code?'on':''}" onclick="changeLang('${l.code}')">
+            <span class="native">${l.native}</span>
+            <span class="lbl">${l.label}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="field"><label>${esc(t('display_name'))}</label>
+      <input id="setName" value="${esc(state.user?.displayName||'')}"></div>
+    <div class="field"><label>${esc(t('bio'))}</label>
+      <textarea id="setBio" rows="3">${esc(state.user?.bio||'')}</textarea></div>
+    <div class="field"><label>${esc(t('your_location'))}</label>
+      <div class="card" style="display:flex;gap:10px;align-items:center">
+        <span>📍</span>
+        <span style="flex:1;font-weight:600">${hasLocation()?esc(state.userCity):'Location not set'}</span>
+        <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="push('setLocation')">${hasLocation()?'Change':'Set'}</button>
+      </div>
+    </div>
+    <div class="field"><label>${esc(t('account'))}</label>
+      <div class="card" style="display:flex;gap:10px;align-items:center">
+        <span>📧</span>
+        <span style="flex:1">${esc(state.user?.email||'')}</span>
+      </div>
+    </div>
+
+    <button class="btn full" style="padding:16px" onclick="saveSettings()">💾 ${esc(t('save_changes'))}</button>
+    <button class="btn ghost full" style="padding:16px;margin-top:10px;color:#c0392b;border-color:#c0392b" onclick="signOut()">🚪 ${esc(t('logout'))}</button>
+  </div>`;
+}
+function changeLang(code){
+  state.lang = code;
+  setInner();
+}
+function saveSettings(){
+  const name = document.getElementById('setName').value.trim();
+  const bio = document.getElementById('setBio').value.trim();
+  if(state.user){ state.user.displayName = name; state.user.bio = bio; }
+  toast(t('saved'), '#3F6E52');
+}
+
+/* ═══════════════ REFERRAL ═══════════════ */
+function viewReferral(){
+  const uid2 = (state.user?.uid || 'USER').slice(0,6).toUpperCase();
+  const code = 'KALA' + uid2;
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('refer'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:24px;text-align:center">
+    <div style="width:140px;height:140px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#D9A441,#E8C57A);display:flex;align-items:center;justify-content:center;font-size:64px;box-shadow:0 12px 30px rgba(217,164,65,.4)">🎁</div>
+    <h2 style="margin-top:24px;font-size:22px;font-weight:700;color:#7A2331">Invite friends, earn ₹150 each</h2>
+    <p style="color:#6B4F3A;margin-top:12px;line-height:1.5;font-size:14px">
+      When they place their first order, you both get 150 coins!
+    </p>
+    <div class="card" style="margin-top:24px;border-color:#7A2331;border-width:2px">
+      <div style="font-size:12px;color:#6B4F3A">Your referral code</div>
+      <div style="font-size:28px;font-weight:700;color:#7A2331;letter-spacing:4px;margin:10px 0">${esc(code)}</div>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button class="btn ghost" style="flex:1" onclick="navigator.clipboard?.writeText('${code}');toast('Copied!','#3F6E52')">📋 Copy</button>
+        <button class="btn" style="flex:1" onclick="navigator.clipboard?.writeText('Join Kalakriti — India\\'s fair marketplace for artisans! Use code: ${code}');toast('Invite copied!','#3F6E52')">↗ Share</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════ PRIVACY ═══════════════ */
+function viewPrivacy(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('privacy'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:16px">
+    <div class="card" style="background:rgba(63,110,82,.1);border-color:rgba(63,110,82,.5)">
+      <div style="display:flex;gap:10px;align-items:center;color:#3F6E52">
+        <span>🛡️</span><span style="font-size:13px">Your data stays yours. We never sell it to third parties.</span>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+    <div class="menu-tile">📍 Show my city to buyers <span style="margin-left:auto">✅</span></div>
+    <div class="menu-tile">📱 Show my phone number <span style="margin-left:auto">⬜</span></div>
+    <div class="menu-tile">📧 Show my email <span style="margin-left:auto">⬜</span></div>
+    <button class="btn ghost full" style="margin-top:20px;padding:14px" onclick="toast('Data export requested','#3F6E52')">⬇️ Download my data</button>
+  </div>`;
+}
+
+/* ═══════════════ FEEDBACK ═══════════════ */
+let feedbackRating = 5;
+function viewFeedback(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('feedback'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:20px">
+    <h3 style="color:#7A2331">How are we doing?</h3>
+    <div style="display:flex;justify-content:center;gap:8px;margin:20px 0">
+      ${[1,2,3,4,5].map(i=>`
+        <button style="font-size:44px;background:none;color:${i<=feedbackRating?'#D9A441':'#ccc'}"
+          onclick="feedbackRating=${i};setInner()">★</button>
+      `).join('')}
+    </div>
+    <textarea id="fbText" rows="5" placeholder="Tell us what you think…"
+      style="width:100%;padding:14px;border-radius:14px;border:1px solid rgba(217,164,65,.5);background:#FFF9EC;font-size:14px"></textarea>
+    <button class="btn full" style="margin-top:20px;padding:16px" onclick="submitFeedback()">📤 Submit</button>
+  </div>`;
+}
+function submitFeedback(){
+  toast('Thank you! Your feedback helps us improve.', '#3F6E52');
+  pop();
+}
+
+/* ═══════════════ NOTIF PREFS ═══════════════ */
+function viewNotifPrefs(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('notification_prefs'))}</div>
+  </div>
+  <div class="screen doodle" style="padding:16px">
+    <div class="menu-tile">🧾 Order updates <span style="margin-left:auto">✅</span></div>
+    <div class="menu-tile">🎟️ Promotions <span style="margin-left:auto">✅</span></div>
+    <div class="menu-tile">🆕 New listings <span style="margin-left:auto">✅</span></div>
+    <div class="menu-tile">📅 Friday deals <span style="margin-left:auto">⬜</span></div>
+  </div>`;
+}
+
+/* ═══════════════ CHAT (AI) ═══════════════ */
+let chatMsgs = [];
+function viewChat(){
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(t('chat_title'))}</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="chatMsgs=[];setInner()">🗑️</button>
+  </div>
+  <div class="screen doodle" id="chatScreen" style="display:flex;flex-direction:column;padding:14px">
+    ${chatMsgs.length===0?`
+      <div class="empty" style="flex:1">
+        <div class="empty-circle">✨</div>
+        <p>${esc(t('chat_empty'))}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px">
+          ${['What should I price my saree?','Festival sale tips?','Photo tips for jewelry?'].map(q=>`
+            <button class="chip" onclick="sendChat('${esc(q)}')">${esc(q)}</button>
+          `).join('')}
+        </div>
+      </div>
+    `:`
+      ${chatMsgs.map(m=>`
+        <div class="chat-bubble ${m.role==='user'?'me':'them'}">${esc(m.content)}</div>
+      `).join('')}
+    `}
+  </div>
+  <div style="padding:10px;background:#FFF9EC;border-top:1px solid rgba(217,164,65,.4);display:flex;gap:8px;align-items:center">
+    <button class="icon-btn" style="color:#7A2331" onclick="chatMic()">🎤</button>
+    <input id="chatInput" placeholder="${esc(t('chat_hint'))}"
+      style="flex:1;padding:12px 14px;border-radius:24px;border:1px solid rgba(217,164,65,.5);background:#fff;font-size:14px"
+      onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="btn" style="padding:10px 14px;border-radius:50%" onclick="sendChat()">➤</button>
+  </div>`;
+}
+
+async function sendChat(prefill){
+  const input = document.getElementById('chatInput');
+  const text = prefill || (input?.value || '').trim();
+  if(!text) return;
+  chatMsgs.push({role:'user', content:text});
+  if(input) input.value = '';
+  setInner();
+  scrollChat();
+  chatMsgs.push({role:'assistant', content:'…'});
+  setInner();
+  scrollChat();
+  const reply = await aiChat(chatMsgs.slice(0,-1).map(m=>({role:m.role, content:m.content})));
+  chatMsgs[chatMsgs.length-1] = {
+    role:'assistant',
+    content: reply || 'Assistant unavailable. Try again later.',
+  };
+  setInner();
+  scrollChat();
+}
+
+function scrollChat(){
+  const s = document.getElementById('chatScreen');
+  if(s) s.scrollTop = s.scrollHeight;
+}
+
+function chatMic(){
+  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){
+    toast(t('mic_unavailable')); return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new SR();
+  rec.lang = 'en-US';
+  rec.onresult = (e)=>{
+    const inp = document.getElementById('chatInput');
+    if(inp) inp.value = e.results[0][0].transcript;
+  };
+  rec.start();
+}
+
+/* ═══════════════ CHAT WITH SELLER (mock) ═══════════════ */
+let sellerChats = {};
+function viewChatSeller(params){
+  const key = params.sellerId;
+  const msgs = sellerChats[key] || [];
+  return `
+  <div class="appbar">
+    <button class="icon-btn" onclick="pop()">←</button>
+    <div class="title">${esc(params.sellerName.split(',')[0])}</div>
+  </div>
+  <div class="screen doodle" id="sellerChatScreen" style="display:flex;flex-direction:column;padding:14px">
+    ${msgs.length===0?`
+      <div class="empty" style="flex:1">
+        <div class="empty-circle">💬</div>
+        <p>Say namaste to the artisan 🙏</p>
+      </div>
+    `:msgs.map(m=>`
+      <div class="chat-bubble ${m.mine?'me':'them'}">${esc(m.text)}</div>
+    `).join('')}
+  </div>
+  <div style="padding:10px;background:#FFF9EC;border-top:1px solid rgba(217,164,65,.4);display:flex;gap:8px;align-items:center">
+    <input id="sellerChatInput" placeholder="Message…"
+      style="flex:1;padding:12px 14px;border-radius:24px;border:1px solid rgba(217,164,65,.5);background:#fff;font-size:14px"
+      onkeydown="if(event.key==='Enter')sendSellerChat('${key}')">
+    <button class="btn" style="padding:10px 14px;border-radius:50%" onclick="sendSellerChat('${key}')">➤</button>
+  </div>`;
+}
+function sendSellerChat(key){
+  const inp = document.getElementById('sellerChatInput');
+  const text = (inp?.value||'').trim();
+  if(!text) return;
+  if(!sellerChats[key]) sellerChats[key] = [];
+  sellerChats[key].push({mine:true, text});
+  if(inp) inp.value = '';
+  setInner();
+  const s = document.getElementById('sellerChatScreen');
+  if(s) s.scrollTop = s.scrollHeight;
+  // auto-reply after delay
+  setTimeout(()=>{
+    sellerChats[key].push({mine:false, text:'Namaste! Thank you for reaching out. 🙏 How can I help you?'});
+    setInner();
+    const s2 = document.getElementById('sellerChatScreen');
+    if(s2) s2.scrollTop = s2.scrollHeight;
+  }, 800);
+}
+
+/* ═══════════════ OVERLAY DISPATCHER ═══════════════ */
+function viewOverlay(item){
+  const {screen, params} = item;
+  let inner = '';
+  switch(screen){
+    case 'product':
+      const p = getProduct(params.id);
+      if(!p) return '';
+      inner = viewProductDetail(p);
+      break;
+    case 'writeReview': inner = viewWriteReview(params); break;
+    case 'seller': inner = viewSeller(params); break;
+    case 'checkout': inner = viewCheckout(); break;
+    case 'orderSuccess': inner = viewOrderSuccess(params); break;
+    case 'tracking': inner = viewTracking(params); break;
+    case 'myShop': inner = viewMyShop(); break;
+    case 'wishlist': inner = viewWishlist(); break;
+    case 'orders': inner = viewOrders(); break;
+    case 'notifications': inner = viewNotifications(); break;
+    case 'addressBook': inner = viewAddressBook(); break;
+    case 'editAddress': inner = viewEditAddress(params); break;
+    case 'setLocation': inner = viewSetLocation(); break;
+    case 'help': inner = viewHelp(); break;
+    case 'about': inner = viewAbout(); break;
+    case 'coupons': inner = viewCoupons(); break;
+    case 'settings': inner = viewSettings(); break;
+    case 'referral': inner = viewReferral(); break;
+    case 'privacy': inner = viewPrivacy(); break;
+    case 'feedback': inner = viewFeedback(); break;
+    case 'notifPrefs': inner = viewNotifPrefs(); break;
+    case 'chat': inner = viewChat(); break;
+    case 'chatSeller': inner = viewChatSeller(params); break;
+    default: inner = `<div class="appbar"><button class="icon-btn" onclick="pop()">←</button>
+      <div class="title">${screen}</div></div><div class="screen doodle"></div>`;
+  }
+  return `<div class="overlay">${inner}</div>`;
+}
+
+/* ═══════════════ INIT ═══════════════ */
+// Splash sequence
+render();
+setTimeout(()=>{
+  if(state.screen === 'splash'){
+    if(state.user) state.screen = 'main';
+    else if(!state.onboarded) state.screen = 'onboarding';
+    else state.screen = 'login';
+    render();
+  }
+}, 2700);
+
+// Warm up AI backend (fire and forget)
+setTimeout(()=>{
+  fetch(AI_BASE + '/').catch(()=>{});
+}, 1000);
+
+</script>
+</body>
+</html>
