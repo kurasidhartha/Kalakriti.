@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════
+#  SECRETS — NEVER COMMIT (PUBLIC REPO!)
+# ═══════════════════════════════════════════════
+**/firebase_options.dart
+**/google-services.json
+**/GoogleService-Info.plist
+**/serviceAccountKey.json
+**/*.keystore
+**/*.jks
+**/key.properties
+**/.env
+**/.env.*
+**/*.pem
+
+# ═══════════════════════════════════════════════
+#  Flutter / Dart
+# ═══════════════════════════════════════════════
+artisan_app/build/
+artisan_app/.dart_tool/
+artisan_app/.flutter-plugins
+artisan_app/.flutter-plugins-dependencies
+artisan_app/.packages
+artisan_app/ios/Pods/
+artisan_app/ios/.symlinks/
+artisan_app/android/.gradle/
+artisan_app/android/local.properties
+artisan_app/android/app/debug/
+artisan_app/android/app/profile/
+artisan_app/android/app/release/
+
+# ═══════════════════════════════════════════════
+#  Python
+# ═══════════════════════════════════════════════
+ai_server/__pycache__/
+ai_server/**/__pycache__/
+ai_server/*.pyc
+ai_server/.venv/
+ai_server/venv/
+ai_server/env/
+ai_server/.pytest_cache/
+ai_server/*.egg-info/
+
+# ═══════════════════════════════════════════════
+#  OS / Editor
+# ═══════════════════════════════════════════════
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.log
