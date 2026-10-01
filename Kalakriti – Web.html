@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kalakriti – Where tradition meets expression</title>
+<style>
+:root{box-sizing:border-box;--cream:#F6EEDE;--paper:#FFF9EC;--maroon:#7A2331;--deep:#5A1825;--gold:#D9A441;--leaf:#3F6E52;--ink:#3B2418;--soft:#6B4F3A;--line:rgba(217,164,65,.45);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#1d1412;--paper:#2a1d19;--maroon:#c4566a;--deep:#7A2331;--ink:#f3e6d6;--soft:#c9b29c}}
+:root[data-theme="dark"]{--cream:#1d1412;--paper:#2a1d19;--maroon:#c4566a;--deep:#7A2331;--ink:#f3e6d6;--soft:#c9b29c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:70px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--deep);color:#fff;display:flex;align-items:center;gap:10px;padding:12px 16px}
+header h1{font-size:19px;margin:0;flex:1;letter-spacing:1px}header select{background:#fff2;color:#fff;border:1px solid #fff4;border-radius:8px;padding:5px}
+header select option{color:#000}
+main{max-width:900px;margin:0 auto;padding:14px}
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);margin:4px 0 12px}
+label{font-weight:700;font-size:13px;color:var(--maroon)}
+.btn{background:var(--maroon);color:#fff;border:0;border-radius:10px;padding:11px 16px;cursor:pointer;font-weight:600}
+.btn.o{background:transparent;color:var(--maroon);border:1px solid var(--maroon)}.btn.g{background:var(--gold);color:#3b2418}.btn.w{width:100%}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px}.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:var(--paper);color:var(--maroon);cursor:pointer;white-space:nowrap;font-size:13px}
+.chip.on{background:var(--maroon);color:#fff}
+.banner{background:rgba(217,164,65,.15);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:12px;color:var(--maroon);margin:6px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column}
+.img{aspect-ratio:1;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;font-size:54px;position:relative}
+.heart{position:absolute;right:8px;top:8px;background:#fffd;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;border:0;cursor:pointer}
+.card .b{padding:9px 10px}.card h3{margin:0;font-size:13px}.card small{color:var(--soft)}.price{color:var(--maroon);font-weight:700;font-size:16px}
+.row{display:flex;align-items:center;gap:10px}.sp{flex:1}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{color:var(--maroon);font-size:20px;border-left:4px solid var(--gold);padding-left:10px;margin:6px 0 14px}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--paper);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;background:none;border:0;padding:9px 0;color:var(--soft);cursor:pointer;font-size:11px}nav button span{display:block;font-size:20px}nav button.on{color:var(--maroon);font-weight:700}
+.modal{position:fixed;inset:0;background:#0008;z-index:9;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--cream);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:0 0 16px}
+.sheet .img{aspect-ratio:4/3;border-radius:0}.sheet .in{padding:14px 16px}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--leaf);color:#fff;padding:10px 18px;border-radius:20px;z-index:20;font-size:14}
+.empty{text-align:center;padding:40px 10px;color:var(--soft)}
+.q button{width:28px;height:28px;border-radius:8px;border:0;background:rgba(122,35,49,.12);color:var(--maroon);cursor:pointer}
+.sum div{display:flex;justify-content:space-between;padding:3px 0}
+</style></head><body>
+<header><span style="font-size:22px">🌸</span><h1 id="brand">Kalakriti</h1>
+<select id="lang"><option value="en">English</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option></select></header>
+<main id="app"></main>
+<nav id="nav"></nav>
+<div id="modal"></div>
+<script>
+const T={en:{shop:'Shop',add:'Upload',cart:'Cart',you:'You',search:'Search sarees, kurtis, jewelry…',fair:'Fair Feed · equal visibility for every seller',all:'All',none:'No products yet.',sample:'Load sample crafts',addc:'Add to Cart',buy:'Buy Now',list:'List a New Craft',title:'Title',desc:'Description',price:'Price (₹)',cat:'Category',loc:'Location',photo:'Photo',pub:'Publish Listing',fill:'Fill title, price and pick an image',done:'Product published!',empty:'Your cart is empty',sub:'Subtotal',disc:'Discount',deliv:'Delivery',total:'Grand Total',coupon:'Coupon code',apply:'Apply',place:'Place Order',addr:'Delivery address',pay:'Payment',orders:'Orders',wish:'Wishlist',mine:'My Listings',del:'Delete',reviews:'Reviews',write:'Write a review',submit:'Submit',noord:'No orders yet',ok:'Order confirmed!',speak:'🎤 Speak description',name:'Your name',free:'FREE'},
+hi:{shop:'दुकान',add:'अपलोड',cart:'कार्ट',you:'आप',search:'साड़ी, कुर्ती, गहने खोजें…',fair:'निष्पक्ष फ़ीड · हर विक्रेता को समान दृश्यता',all:'सभी',none:'अभी कोई उत्पाद नहीं।',sample:'नमूना उत्पाद लोड करें',addc:'कार्ट में जोड़ें',buy:'अभी खरीदें',list:'नई कला जोड़ें',title:'शीर्षक',desc:'विवरण',price:'कीमत (₹)',cat:'श्रेणी',loc:'स्थान',photo:'फ़ोटो',pub:'सूची प्रकाशित करें',fill:'शीर्षक, कीमत, फ़ोटो चुनें',done:'उत्पाद प्रकाशित हुआ!',empty:'कार्ट खाली है',sub:'उप-योग',disc:'छूट',deliv:'डिलीवरी',total:'कुल योग',coupon:'कूपन कोड',apply:'लागू करें',place:'ऑर्डर करें',addr:'डिलीवरी पता',pay:'भुगतान',orders:'ऑर्डर',wish:'पसंदीदा',mine:'मेरे उत्पाद',del:'हटाएं',reviews:'समीक्षाएँ',write:'समीक्षा लिखें',submit:'भेजें',noord:'अभी कोई ऑर्डर नहीं',ok:'ऑर्डर की पुष्टि हुई!',speak:'🎤 बोलकर विवरण भरें',name:'आपका नाम',free:'मुफ़्त'},
+te:{shop:'దుకాణం',add:'అప్‌లోడ్',cart:'బండి',you:'మీరు',search:'చీరలు, కుర్తీలు, ఆభరణాలు…',fair:'న్యాయమైన ఫీడ్ · ప్రతి విక్రేతకు సమానం',all:'అన్నీ',none:'ఇంకా ఉత్పత్తులు లేవు.',sample:'నమూనా ఉత్పత్తులు లోడ్ చేయి',addc:'బండికి జోడించు',buy:'ఇప్పుడే కొనండి',list:'కొత్త కళ జోడించు',title:'శీర్షిక',desc:'వివరణ',price:'ధర (₹)',cat:'వర్గం',loc:'స్థానం',photo:'ఫోటో',pub:'జాబితా ప్రచురించు',fill:'శీర్షిక, ధర, ఫోటో నింపండి',done:'ఉత్పత్తి ప్రచురించబడింది!',empty:'బండి ఖాళీగా ఉంది',sub:'ఉప మొత్తం',disc:'తగ్గింపు',deliv:'డెలివరీ',total:'మొత్తం',coupon:'కూపన్ కోడ్',apply:'వర్తించు',place:'ఆర్డర్ పెట్టు',addr:'డెలివరీ చిరునామా',pay:'చెల్లింపు',orders:'ఆర్డర్లు',wish:'ఇష్టమైనవి',mine:'నా ఉత్పత్తులు',del:'తొలగించు',reviews:'సమీక్షలు',write:'సమీక్ష రాయండి',submit:'సమర్పించు',noord:'ఆర్డర్లు లేవు',ok:'ఆర్డర్ నిర్ధారించబడింది!',speak:'🎤 మాట్లాడి వివరణ',name:'మీ పేరు',free:'ఉచితం'}};
+const CATS=['Sarees','Dresses','Handicrafts','Jewelry'],ICON={Sarees:'🥻',Dresses:'👗',Handicrafts:'🏺',Jewelry:'💎'};
+const COUPONS={WELCOME10:[10,500,1000],FESTIVE20:[20,1500,3000],HANDLOOM15:[15,800,1500]};
+const L=(k,d)=>{try{return JSON.parse(localStorage.getItem('k_'+k))??d}catch(e){return d}};
+const S=(k,v)=>{try{localStorage.setItem('k_'+k,JSON.stringify(v))}catch(e){}};
+let st={tab:'shop',q:'',cat:'All',lang:L('lang','en'),products:L('products',[]),cart:L('cart',{}),wish:L('wish',[]),orders:L('orders',[]),reviews:L('reviews',{}),name:L('name',''),coupon:null,draft:{cat:'Sarees',img:''},pay:'COD',addr:L('addr','')};
+const t=k=>(T[st.lang]||T.en)[k]||T.en[k]||k;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(m){const d=document.createElement('div');d.className='toast';d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),1600)}
+function save(){S('products',st.products);S('cart',st.cart);S('wish',st.wish);S('orders',st.orders);S('reviews',st.reviews);S('lang',st.lang);S('name',st.name);S('addr',st.addr)}
+function seed(){const s=[['Banarasi Silk Saree','Sarees',4200,'Handwoven pure silk with gold zari border from Varanasi.','Varanasi, UP'],['Pochampally Ikat Saree','Sarees',2600,'Traditional double ikat cotton saree.','Pochampally, TS'],['Brass Dhokra Figurine','Handicrafts',1200,'Lost-wax cast tribal brass art.','Bastar, CG'],['Kundan Necklace Set','Jewelry',1800,'Jaipur-style kundan with pearls.','Jaipur, RJ'],['Block Print Kurti','Dresses',950,'Hand block-printed cotton kurti.','Jaipur, RJ'],['Kantha Stitch Dupatta','Dresses',1100,'Hand-stitched Kantha from Bengal.','Kolkata, WB']];
+s.forEach((x,i)=>st.products.push({id:'s'+Date.now()+i,title:x[0],category:x[1],price:x[2],description:x[3],location:x[4],img:'',seller:'Artisan Co-op',sellerId:'demo',created:Date.now()-i*1e5}));save();render()}
+function feed(){const by={};st.products.forEach(p=>(by[p.sellerId]??=[]).push(p));Object.values(by).forEach(l=>l.sort((a,b)=>b.created-a.created));const out=[];let i=0,a=true;while(a){a=false;for(const k in by)if(i<by[k].length){out.push(by[k][i]);a=true}i++}return out}
+function tile(p){const bg=p.img?`background-image:url(${p.img})`:`background:linear-gradient(135deg,#7A233166,#D9A441aa)`;return `<div class="img" style="${bg}">${p.img?'':ICON[p.category]||'🛍️'}<button class="heart" onclick="event.stopPropagation();wish('${p.id}')">${st.wish.includes(p.id)?'❤️':'🤍'}</button></div>`}
+function card(p){return `<div class="card" onclick="detail('${p.id}')">${tile(p)}<div class="b"><h3>${esc(p.title)}</h3><small>${esc(p.seller||'')} · ${esc(p.location||'')}</small><div class="row"><span class="price">₹${p.price}</span><span class="sp"></span><button class="btn" style="padding:4px 10px" onclick="event.stopPropagation();addCart('${p.id}')">+</button></div></div></div>`}
+function wish(id){const i=st.wish.indexOf(id);i<0?st.wish.push(id):st.wish.splice(i,1);save();render();if($('#modal').innerHTML)detail(id)}
+function addCart(id,go){st.cart[id]=(st.cart[id]||0)+1;save();toast('✓ '+t('addc'));if(go){closeM();st.tab='cart'}render()}
+function closeM(){$('#modal').innerHTML=''}
+function detail(id){const p=st.products.find(x=>x.id==id);if(!p)return;const rv=st.reviews[id]||[];const avg=rv.length?(rv.reduce((a,r)=>a+r.r,0)/rv.length).toFixed(1):'';
+$('#modal').innerHTML=`<div class="modal" onclick="if(event.target==this)closeM()"><div class="sheet">${tile(p)}<div class="in"><h2 style="margin-top:0">${esc(p.title)}</h2><div class="price" style="font-size:26px">₹${p.price}</div><p><small>${p.category} · 📍 ${esc(p.location||'India')} · by ${esc(p.seller||'')}</small></p><p style="line-height:1.6">${esc(p.description)}</p><div class="banner">🚚 Estimated delivery 3–5 days · ${p.price>500?t('free'):'₹40'}</div><div class="row"><button class="btn o sp" onclick="addCart('${p.id}');closeM()">${t('addc')}</button><button class="btn sp" onclick="addCart('${p.id}',1)">${t('buy')}</button></div><h2 style="margin-top:20px">${t('reviews')} ${avg?'⭐'+avg:''}</h2>${rv.map(r=>`<div class="box"><b>${esc(r.n)}</b> ${'⭐'.repeat(r.r)}<br>${esc(r.t)}</div>`).join('')||'<div class="empty">—</div>'}<select id="rr"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select><input id="rt" placeholder="${t('write')}"><button class="btn o w" onclick="review('${p.id}')">${t('submit')}</button></div></div></div>`}
+function review(id){const x=$('#rt').value.trim();if(!x)return;(st.reviews[id]??=[]).unshift({n:st.name||'Guest',r:+$('#rr').value,t:x});save();detail(id)}
+function cartCalc(){const items=Object.entries(st.cart).map(([id,q])=>({p:st.products.find(x=>x.id==id),q})).filter(x=>x.p);const sub=items.reduce((a,x)=>a+x.p.price*x.q,0);let d=0;if(st.coupon){const c=COUPONS[st.coupon];d=Math.min(sub*c[0]/100,c[1])}const fee=!items.length||sub>500?0:40;return{items,sub,d,fee,total:sub-d+fee}}
+function vShop(){const q=st.q.toLowerCase();let f=feed().filter(p=>(st.cat=='All'||p.category==st.cat)&&(!q||(p.title+p.description+p.seller).toLowerCase().includes(q)));
+return `<input id="q" placeholder="${t('search')}" value="${esc(st.q)}" oninput="st.q=this.value;gridOnly()"><div class="chips">${['All',...CATS].map(c=>`<span class="chip ${st.cat==c?'on':''}" onclick="st.cat='${c}';render()">${c=='All'?t('all'):c}</span>`).join('')}</div><div class="banner">⚖️ ${t('fair')}</div><div id="g">${gridHTML(f)}</div>`}
+function gridHTML(f){return f.length?`<div class="grid">${f.map(card).join('')}</div>`:`<div class="empty">🔍<p>${t('none')}</p>${st.products.length?'':`<button class="btn" onclick="seed()">${t('sample')}</button>`}</div>`}
+function gridOnly(){const q=st.q.toLowerCase();$('#g').innerHTML=gridHTML(feed().filter(p=>(st.cat=='All'||p.category==st.cat)&&(!q||(p.title+p.description+p.seller).toLowerCase().includes(q))))}
+function vAdd(){const d=st.draft;return `<h2>${t('list')}</h2><label>${t('photo')}</label><input type="file" accept="image/*" onchange="pickImg(this)">${d.img?`<img src="${d.img}" style="width:100%;max-height:240px;object-fit:cover;border-radius:12px;margin-bottom:12px">`:''}<label>${t('cat')}</label><select id="uc">${CATS.map(c=>`<option ${d.cat==c?'selected':''}>${c}</option>`).join('')}</select><label>${t('title')}</label><input id="ut" value="${esc(d.t||'')}"><label>${t('desc')}</label><textarea id="ud" rows="4">${esc(d.d||'')}</textarea><button class="btn o w" style="margin-bottom:12px" onclick="speak()">${t('speak')}</button><label>${t('price')}</label><input id="up" type="number" value="${d.p||''}"><label>${t('loc')}</label><input id="ul" value="${esc(d.l||'')}" placeholder="Jaipur, Rajasthan"><button class="btn w" onclick="publish()">${t('pub')}</button>`}
+function keep(){const g=i=>$('#'+i)?.value;st.draft={...st.draft,cat:g('uc'),t:g('ut'),d:g('ud'),p:g('up'),l:g('ul')}}
+function pickImg(el){keep();const f=el.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const im=new Image();im.onload=()=>{const s=Math.min(1,700/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);st.draft.img=c.toDataURL('image/jpeg',.7);render()};im.src=e.target.result};r.readAsDataURL(f)}
+function speak(){keep();const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){toast('Voice not supported');return}const r=new R();r.lang={en:'en-IN',hi:'hi-IN',te:'te-IN'}[st.lang];r.onresult=e=>{st.draft.d=(st.draft.d?st.draft.d+' ':'')+e.results[0][0].transcript;render()};r.onerror=()=>toast('Mic unavailable');r.start()}
+function publish(){keep();const d=st.draft;if(!d.t||!d.p||!d.img){toast(t('fill'));return}st.products.unshift({id:'u'+Date.now(),title:d.t,category:d.cat,price:+d.p,description:d.d||'',location:d.l||'',img:d.img,seller:st.name||'My Shop',sellerId:'me',created:Date.now()});st.draft={cat:'Sarees',img:''};save();toast(t('done'));st.tab='shop';render()}
+function vCart(){const c=cartCalc();if(!c.items.length)return `<div class="empty">🛒<p>${t('empty')}</p></div>`;
+return `<h2>${t('cart')}</h2>${c.items.map(({p,q})=>`<div class="box row"><div style="width:60px;height:60px;border-radius:10px;background:${p.img?`url(${p.img}) center/cover`:'#D9A44155'};display:flex;align-items:center;justify-content:center;font-size:28px">${p.img?'':ICON[p.category]}</div><div class="sp"><b>${esc(p.title)}</b><div class="q row"><button onclick="qty('${p.id}',-1)">−</button><b>${q}</b><button onclick="qty('${p.id}',1)">+</button></div></div><b class="price">₹${p.price*q}</b></div>`).join('')}
+<div class="row"><input id="cc" placeholder="${t('coupon')} (WELCOME10)" value="${st.coupon||''}" style="margin:0"><button class="btn" onclick="coupon()">${t('apply')}</button></div>
+<div class="box sum" style="margin-top:12px"><div><span>${t('sub')}</span><span>₹${c.sub}</span></div>${c.d?`<div style="color:var(--leaf)"><span>${t('disc')}</span><span>−₹${c.d}</span></div>`:''}<div><span>${t('deliv')}</span><span>${c.fee?'₹'+c.fee:t('free')}</span></div><div class="price" style="border-top:1px solid var(--line);margin-top:6px;padding-top:8px"><span>${t('total')}</span><span>₹${c.total}</span></div></div>
+<label>${t('addr')}</label><textarea id="ad" rows="2" onchange="st.addr=this.value;save()">${esc(st.addr)}</textarea><label>${t('pay')}</label><select onchange="st.pay=this.value"><option>COD</option><option>UPI</option><option>Card</option><option>Net Banking</option></select><button class="btn w" onclick="placeOrder()">${t('place')}</button>`}
+function qty(id,d){st.cart[id]=(st.cart[id]||0)+d;if(st.cart[id]<=0)delete st.cart[id];save();render()}
+function coupon(){const c=$('#cc').value.trim().toUpperCase(),x=COUPONS[c];if(!x||cartCalc().sub<x[2]){st.coupon=null;toast('Invalid coupon');render();return}st.coupon=c;toast('Coupon applied!');render()}
+function placeOrder(){const c=cartCalc();st.addr=$('#ad').value.trim();if(!st.addr){toast(t('addr'));return}st.orders.unshift({id:Math.random().toString(36).slice(2,10).toUpperCase(),total:c.total,n:c.items.reduce((a,x)=>a+x.q,0),at:Date.now(),pay:st.pay,addr:st.addr});st.cart={};st.coupon=null;save();toast(t('ok'));st.tab='you';render()}
+function vYou(){const mine=st.products.filter(p=>p.sellerId=='me'),w=st.products.filter(p=>st.wish.includes(p.id));
+return `<div class="box" style="background:var(--deep);color:#fff;text-align:center"><div style="font-size:44px">👤</div><label style="color:#F6EEDE">${t('name')}</label><input value="${esc(st.name)}" onchange="st.name=this.value;save()" style="text-align:center"></div>
+<h2>${t('orders')}</h2>${st.orders.length?st.orders.map(o=>`<div class="box"><b>#${o.id}</b> · ${o.n} item(s) · <span class="price">₹${o.total}</span><br><small>${new Date(o.at).toLocaleDateString()} · ${o.pay} · ✅ Confirmed</small></div>`).join(''):`<div class="empty">${t('noord')}</div>`}
+<h2>${t('wish')}</h2>${w.length?`<div class="grid">${w.map(card).join('')}</div>`:'<div class="empty">🤍</div>'}
+<h2>${t('mine')}</h2>${mine.length?`<div class="grid">${mine.map(p=>card(p)+'').join('')}</div>${mine.map(p=>`<button class="btn o" style="margin:8px 8px 0 0" onclick="delP('${p.id}')">${t('del')} ${esc(p.title)}</button>`).join('')}`:'<div class="empty">—</div>'}`}
+function delP(id){st.products=st.products.filter(p=>p.id!=id);delete st.cart[id];save();render()}
+function render(){const a=$('#app'),keepQ=document.activeElement?.id=='q';
+a.innerHTML={shop:vShop,add:vAdd,cart:vCart,you:vYou}[st.tab]();
+const n=Object.values(st.cart).reduce((a,b)=>a+b,0);
+$('#nav').innerHTML=[['shop','🏪'],['add','📸'],['cart','🛒'+(n?` <b style="color:var(--gold)">${n}</b>`:'')],['you','👤']].map(([k,i])=>`<button class="${st.tab==k?'on':''}" onclick="${k=='add'?'':''}go('${k}')"><span>${i}</span>${t(k)}</button>`).join('');
+$('#lang').value=st.lang;if(keepQ){const e=$('#q');e.focus();e.setSelectionRange(e.value.length,e.value.length)}}
+function go(k){if(st.tab=='add')keep();st.tab=k;render();scrollTo(0,0)}
+$('#lang').onchange=e=>{if(st.tab=='add')keep();st.lang=e.target.value;save();render()};
+render();
+</script></body></html>
