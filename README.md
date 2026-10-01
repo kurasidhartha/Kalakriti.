@@ -1,2 +1,26 @@
-# Kalakriti.
-Kalakriti — AI-Powered Artisans E-Commerce Platform  Kalakriti is an innovative AI-powered e-commerce platform designed to connect traditional artisans, skilled creators, and customers through technology. 
+\# 🎨 Kalakriti
+
+
+
+A fair, AI-powered marketplace for Indian artisans.
+
+
+
+\## ✨ Features
+
+\- 🤖 AI product auto-fill (Gemini)
+
+\- 🖼️ Background removal
+
+\- 📍 Distance-based delivery ETA
+
+\- 🗺️ Artisan map of India
+
+\- 🌐 Multilingual (English · हिन्दी · తెలుగు)
+
+\- 🛒 Full shopping + checkout flow
+
+
+
+\## 📂 Project Structure
+

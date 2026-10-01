@@ -1,0 +1,12 @@
+physics (00:03:28)
+  [x] relative motion
+  [x] laws of motion
+  [x] circular motion
+
+maths (00:00:00)
+  [x] calcus
+  [x] algebra
+
+chemistry (00:00:00)
+  [x] organic
+  [x] inorganic
