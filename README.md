@@ -24,5 +24,7 @@ A fair, AI-powered marketplace for Indian artisans.
 
 \## 📂 Project Structure
 
- https://kurasidhartha.github.io/Kalakriti./
+ https://kurasidhartha.github.io/Kalakriti/
+
+
  
